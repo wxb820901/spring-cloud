@@ -8,11 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-/**
- * Simple domain class representing a {@link com.example.api.entity.Customer}.
- *
- * @author Oliver Gierke
- */
+
 @Entity
 @EqualsAndHashCode(of = "id")
 @Getter
