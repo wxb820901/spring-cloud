@@ -1,0 +1,6 @@
+rootProject.name = 'demo'
+
+include 'demo-rest-repo'
+include 'demo-feign'
+include 'demo-eureka'
+include 'demo-zuul'
