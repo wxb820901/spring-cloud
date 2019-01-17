@@ -3,8 +3,10 @@ package com.example.demorestrepo;
 
 import com.example.demorestrepo.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -18,17 +20,17 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
+@EnableDiscoveryClient
 public class DemoRestRepoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoRestRepoApplication.class, args);
 	}
-
 	@Autowired
 	DataInitializer initializer;
 
-	@Autowired
-	private Environment env;
+	@Value("${test.message}")
+	private String text;
 
 	@PostConstruct
 	public void init() {
@@ -37,9 +39,9 @@ public class DemoRestRepoApplication {
 //		initializer.initializeOrder(customerId);
 	}
 
-	@GetMapping("/hello" )
-	public String helloConfig(){
-		return env.getProperty("foo.db");
+	@GetMapping("/configMsg" )
+	public String configMsg(){
+		return text;
 	}
 
 }
