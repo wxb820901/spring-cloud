@@ -1,12 +1,12 @@
 
 spring:
-	profiles: r1
+    profiles: r1
 server:
-	port: 59201
+    port: 59201
 
 ---
 
 spring:
-	profiles: r2
+    profiles: r2
 server:
-	port: 59202
+    port: 59202
