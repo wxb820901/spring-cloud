@@ -1,0 +1,12 @@
+
+spring:
+	profiles: r1
+server:
+	port: 59201
+
+---
+
+spring:
+	profiles: r2
+server:
+	port: 59202
