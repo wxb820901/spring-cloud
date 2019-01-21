@@ -29,7 +29,7 @@ public class DemoFeignApplication {
 		System.out.println("====>"+customersClient.getCustomer(1l));
 		System.out.println("====>"+env.getActiveProfiles().length);
 
-
+		System.out.println("====>"+customersClient.getConfigMsg());
 	}
 
 }

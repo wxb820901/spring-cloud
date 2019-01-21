@@ -15,4 +15,7 @@ public interface CustomersClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/customers/{customerId}", consumes = "application/json")
     Customer getCustomer(@PathVariable("customerId") Long customerId);
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/configMsg")
+    String getConfigMsg();
 }
