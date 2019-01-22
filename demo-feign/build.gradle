@@ -33,6 +33,7 @@ ext {
 dependencies {
     implementation 'com.example:demo-rest-repo:0.0.1-SNAPSHOT'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
     implementation 'org.springframework.hateoas:spring-hateoas'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
