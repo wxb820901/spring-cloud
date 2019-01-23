@@ -1,0 +1,50 @@
+server:
+  port: 59301
+#docker run -d --hostname localhost --name rabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -p 15672:15672 -p 5672:5672 -p 25672:25672 -p 61613:61613 -p 1883:1883 rabbitmq:management
+spring:
+  cloud:
+    stream:
+      defaultBinder: defaultRabbit
+      bindings:
+        input:
+          destination: mqTestDefault    # 目的，对应 MQ 是 exchange， 生成临时队列
+        output:
+          destination: mqTestDefault
+          contentType: text/plain
+          binder: defaultRabbit
+        inputOrder:
+          destination: mqTestOrder
+          group: orderReceiveGroup1     # 具体分组 对应 MQ 是 队列名称 并且持久化队列
+        outputOrder:
+          destination: mqTestOrder
+#          contentType: text/plain      # 实体 json string 在传递的类型装换 查看 http://docs.spring.io/spring-cloud-stream/docs/Chelsea.SR2/reference/htmlsingle/index.html#mime-types-and-java-types
+        inputProductAdd:
+          destination: mqTestProduct
+          group: addProductHandler      # 拥有 group 默认会持久化队列
+        outputProductAdd:
+          destination: mqTestProduct
+      rabbit:
+        bindings:
+          inputProductAdd:
+            consumer:
+              bindingRoutingKey: addProduct.*       # 用来并不绑定消费者的 routing key
+          outputProductAdd:
+            producer:
+              routing-key-expression: '''addProduct.*'''  # 需要用这个来指定 RoutingKey
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+             rabbitmq:
+              host: 127.0.0.1
+              username: guest
+              password: guest
+              virtual-host: /
+application:
+    name: demo-stream
+#  rabbitmq:                 
+#    virtual-host: dev
+#    host: 127.0.0.1
+#    username: username
+#    password: pass
