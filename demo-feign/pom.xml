@@ -49,7 +49,7 @@
 
 		<dependency>
 			<groupId>com.example</groupId>
-			<artifactId>demo-rest-repo</artifactId>
+			<artifactId>demo-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
