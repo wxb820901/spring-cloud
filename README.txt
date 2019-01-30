@@ -10,3 +10,10 @@ docker run --name feign     --link config --link eureka --link rest-repo -p 8080
 docker run --name zuul      --link config --link eureka --link rest-repo -p 59101:59101 springio/demo-zuul
 
 ---------------------------------------rabbit---------------------------------------------
+docker run -d --hostname localhost --name rabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -p 15672:15672 -p 5672:5672 -p 25672:25672 -p 61613:61613 -p 1883:1883 rabbitmq:management
+
+---------------------------------------stop all and remove all----------------------------
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+------------------------------------------------------------------------------------------
