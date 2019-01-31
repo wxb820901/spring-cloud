@@ -44,17 +44,9 @@ services:
     depends_on:
       - eureka
       - config
-  zuul:
-    image: "springio/demo-zuul"
-    ports:
-      - "59101:59101"
-    depends_on:
-      - eureka
-      - config
       - rest-repo1
       - rest-repo2
-      
-      
+
   zuul:
     image: "springio/demo-zuul"
     ports:

@@ -26,7 +26,7 @@ import javax.annotation.PostConstruct;
 public class DemoRestRepoApplication {
 
 	public static void main(String[] args) {
-		System.out.println("which profiles do you want? r1 or r2");
+//		System.out.println("which profiles do you want? r1 or r2");
 //		Scanner scan = new Scanner(System.in);
 //		String profiles = scan.nextLine();
 		String profiles = System.getenv("ACTIVE_PROFILES");

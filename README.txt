@@ -39,3 +39,8 @@ docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 / #ping condig
 ---------------------------------------build from outer pom--------------------------------------
 mvn install -pl demo-stream dockerfile:build
+mvn install -pl demo-eureka dockerfile:build
+mvn install -pl demo-config dockerfile:build
+mvn install -pl demo-rest-repo dockerfile:build
+mvn install -pl demo-feign dockerfile:build
+mvn install -pl demo-zuul dockerfile:build
