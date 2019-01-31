@@ -6,11 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+import feign.Retryer;
 
 import javax.annotation.PostConstruct;
 
@@ -44,7 +47,19 @@ public class DemoFeignApplication {
 	}
 	public String reliable() {
 	    return "Cloud Native Java (O'Reilly)";
-}
+	}
+	
 
+	  /**
+	 *
+	 * 注册一个重试Bean 默认FeignClient不会进行重试，使用的是{@link feign.Retryer#NEVER_RETRY}
+	 *
+	 * @see FeignClientsConfiguration#feignRetryer()
+	 */
+	
+	@Bean
+    public Retryer feignRetryer() {
+        return new Retryer.Default();
+    }
 }
 
