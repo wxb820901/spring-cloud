@@ -1,0 +1,75 @@
+version: '3'
+services:
+
+  eureka:
+    image: "springio/demo-eureka"
+    ports:
+      - "8762:8762"
+    
+    
+  config:
+    image: "springio/demo-config"
+    ports:
+      - "59001:59001"
+    depends_on:
+      - eureka
+
+    
+  rest-repo1:
+    image: "springio/demo-rest-repo"
+    environment:
+      ACTIVE_PROFILES: r1
+    ports:
+      - "59201:59201"
+    depends_on:
+      - eureka
+      - config
+
+    
+  rest-repo2:
+    image: "springio/demo-rest-repo"
+    environment:
+      ACTIVE_PROFILES: r2
+    ports:
+      - "59202:59202"
+    depends_on:
+      - eureka
+      - config    
+      
+      
+  feign:
+    image: "springio/demo-feign"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka
+      - config
+  zuul:
+    image: "springio/demo-zuul"
+    ports:
+      - "59101:59101"
+    depends_on:
+      - eureka
+      - config
+      - rest-repo1
+      - rest-repo2
+      
+      
+  zuul:
+    image: "springio/demo-zuul"
+    ports:
+      - "59101:59101"
+    depends_on:
+      - eureka
+      - config
+      - rest-repo1
+      - rest-repo2
+      - feign
+      
+      
+      
+      
+networks:
+  default:
+    external:
+      name: spring-cloud-network
