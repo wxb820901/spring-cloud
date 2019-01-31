@@ -37,3 +37,5 @@ docker-compose up
 docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
 / #ping condig
+---------------------------------------build from outer pom--------------------------------------
+mvn install -pl demo-stream dockerfile:build
