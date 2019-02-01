@@ -1,5 +1,14 @@
 ----------------------------------------build app and docker image---------------------------------------------
 mvn install dockerfile:build
+---------------------------------------build from outer pom--------------------------------------
+mvn install -pl demo-stream dockerfile:build
+mvn install -pl demo-eureka dockerfile:build
+mvn install -pl demo-config dockerfile:build
+mvn install -pl demo-rest-repo dockerfile:build
+mvn install -pl demo-feign dockerfile:build
+mvn install -pl demo-zuul dockerfile:build
+mvn install -pl demo-api
+
 ----------------------------------------start up app individual with link--------------------------------------------------
 docker run --name eureka                         -p 8762:8762   springio/demo-eureka
 docker run --name config    --link eureka        -p 59001:59001 springio/demo-config
@@ -37,10 +46,4 @@ docker-compose up
 docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
 / #ping condig
----------------------------------------build from outer pom--------------------------------------
-mvn install -pl demo-stream dockerfile:build
-mvn install -pl demo-eureka dockerfile:build
-mvn install -pl demo-config dockerfile:build
-mvn install -pl demo-rest-repo dockerfile:build
-mvn install -pl demo-feign dockerfile:build
-mvn install -pl demo-zuul dockerfile:build
+
