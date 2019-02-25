@@ -36,7 +36,14 @@ services:
       - eureka
       - config    
       
-      
+  webflux:
+    image: "springio/demo-webflux"
+    ports:
+      - "59301:59301"
+    depends_on:
+      - eureka
+      - config
+
   feign:
     image: "springio/demo-feign"
     ports:
