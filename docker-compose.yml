@@ -1,6 +1,21 @@
 version: '3'
 services:
 
+  redis:
+    image: "redis"
+    port:
+      - "6379:6379"
+
+
+  redis-demo:
+    iamge: "springio/demo-redis"
+    port:
+      - "59401:59401"
+    depends_on:
+      - redis
+      - eureka
+
+
   eureka:
     image: "springio/demo-eureka"
     ports:

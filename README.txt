@@ -21,6 +21,9 @@ docker run --name zuul      --link config --link eureka --link rest-repo -p 5910
 
 ---------------------------------------rabbit---------------------------------------------
 docker run -d --hostname localhost --name rabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -p 15672:15672 -p 5672:5672 -p 25672:25672 -p 61613:61613 -p 1883:1883 rabbitmq:management
+---------------------------------------redis-----------------------------------------------------
+docker run --name redis --network spring-cloud-network -p 6379:6379 -d redis redis-server --appendonly yes
+
 
 ---------------------------------------stop all and remove all----------------------------
 docker stop $(docker ps -a -q)
@@ -45,5 +48,5 @@ docker-compose up
 ---------------------------------------check network---------------------------------------------
 docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
-/ #ping condig
+/ #ping config
 
