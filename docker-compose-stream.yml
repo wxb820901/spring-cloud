@@ -18,12 +18,12 @@ services:
       KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
 
-  stream:
-    image: "demo/demo-stream"
-    depends_on:
-      - kafka1
-    ports:
-      - "59301:59301"
+#  stream:
+#    image: "demo/demo-stream"
+#    depends_on:
+#      - kafka1
+#    ports:
+#      - "59301:59301"
       
       
       
