@@ -1,24 +1,45 @@
 version: '3'
 services:
+#
+#  redis:
+#    image: "redis"
+#    port:
+#      - "6379:6379"
+
+
+  jedis:
+    iamge: "demo/demo-redis"
+    port:
+      - "59401:59401"
+    environment:
+      - spring_profiles_active: dev
+    depends_on:
+      - redis
+      - eureka
+
 
   eureka:
-    image: "springio/demo-eureka"
+    image: "demo/demo-eureka"
     ports:
       - "8762:8762"
+    environment:
+      - spring_profiles_active: dev
     
     
   config:
-    image: "springio/demo-config"
+    image: "demo/demo-config"
     ports:
       - "59001:59001"
+    environment:
+      - spring_profiles_active: dev
     depends_on:
       - eureka
 
     
   rest-repo1:
-    image: "springio/demo-rest-repo"
+    image: "demo/demo-rest-repo"
     environment:
-      ACTIVE_PROFILES: r1
+      - spring_profiles_active: docker-cluster-node1
     ports:
       - "59201:59201"
     depends_on:
@@ -27,20 +48,31 @@ services:
 
     
   rest-repo2:
-    image: "springio/demo-rest-repo"
+    image: "demo/demo-rest-repo"
     environment:
-      ACTIVE_PROFILES: r2
+      - spring_profiles_active: docker-cluster-node2
     ports:
       - "59202:59202"
     depends_on:
       - eureka
       - config    
       
-      
-  feign:
-    image: "springio/demo-feign"
+  webflux:
+    image: "demo/demo-webflux"
     ports:
-      - "8080:8080"
+      - "59301:59301"
+    environment:
+      - spring_profiles_active: dev
+    depends_on:
+      - eureka
+      - config
+
+  feign:
+    image: "demo/demo-feign"
+    ports:
+      - "59501:59501"
+    environment:
+      - spring_profiles_active: dev
     depends_on:
       - eureka
       - config
@@ -48,15 +80,19 @@ services:
       - rest-repo2
 
   zuul:
-    image: "springio/demo-zuul"
+    image: "demo/demo-zuul"
     ports:
       - "59101:59101"
+    environment:
+      - spring_profiles_active: dev
     depends_on:
       - eureka
       - config
       - rest-repo1
       - rest-repo2
       - feign
+      - webflux
+      - jedis
       
       
       

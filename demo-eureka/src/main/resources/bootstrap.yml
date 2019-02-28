@@ -1,0 +1,64 @@
+spring:
+  profiles:
+    active: dev
+
+---
+
+spring:
+  application:
+    name: eureka
+  profiles: dev
+
+server:
+  port: 8762
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://localhost:8762/eureka
+  server:
+    peer-node-read-timeout-ms: 2000
+
+---
+
+spring:
+  application:
+    name: eureka
+  profiles: docker
+
+server:
+  port: 8762
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://eureka:8762/eureka
+  server:
+    peer-node-read-timeout-ms: 2000
+
+
+
+
+#  cloud:
+#    config:
+#      failFast: true
+#      retry:
+#        initial-interval: 1000
+#        max-attempts: 1000
+#        max-interval: 5000
+#        multiplier: 1.1
+#      enabled: true
+#      name: demo-eureka
+#      profile: dev
+#      label: master
+#      uri: http://config:59001
+#      username: billwang
+#      password: '{cipher}AQA6Ov/ToKq5amRgXPof2gbbQyb9dBphJEAuiq1BA5byEed0CtOcWRS+sO8ejoxqFvSlVWN0e2A6BosUUwwFKTEIGVTnqgyHsP3kcHp9cqdeS75FqcWnXop+FLUoYvEFD3sJUVTCn/Zjqcdi0gj3sVEKxl+GS1jeJfs0t6cNCHvc2U7BA/13ujPyHYesX6/teLf5BZCHCt6FgbsmGB3/KZvf751lW6+LN2Xa05eWBTYzjNvo/JUPmh4odaihpw0Ebs6VMxoTOJwcGIu0ih16/ITICmA4tC0IO7sjtSGg8jq2YHRAcZJeBQtuzSNf8do0o01y2rUUsV6fDMiSf/mAwDJzbwyTf2Wsv7mofMwg6tlP2IM/Sk16kc1ZQd3JNQOeRDQ='
+#encrypt:
+#  keyStore:
+#    location: classpath:server.jks
+#    password: password
+#    alias: testkey
+#    secret: password

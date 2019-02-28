@@ -37,6 +37,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.projectlombok:lombok'
+    implementation 'org.hsqldb:hsqldb'
     implementation 'com.example:demo-api:0.0.1-SNAPSHOT'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -25,7 +25,8 @@
 		<module>demo-rest-repo</module>
 		<module>demo-feign</module>
 		<module>demo-stream</module>
-
+        <module>demo-webflux</module>
+		<module>demo-redis</module>
 	</modules>
 
 	<!--<build>-->

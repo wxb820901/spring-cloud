@@ -28,6 +28,7 @@ ext {
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.retry:spring-retry'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

@@ -3,6 +3,7 @@ buildscript {
 		springBootVersion = '2.0.8.RELEASE'
 	}
 	repositories {
+		mavenLocal()
 		mavenCentral()
 	}
 	dependencies {
@@ -13,30 +14,31 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven-publish'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+jar.enabled = true
 
 repositories {
+	mavenLocal()
 	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
-	set('springCloudVersion', 'Greenwich.RC2')
+	set('springCloudVersion', 'Finchley.SR2')
 }
 
-dependencies {
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-stream'
-	implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
-	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
-	implementation 'org.projectlombok:lombok'
 
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'com.example:demo-api:0.0.1-SNAPSHOT'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 }
 
 dependencyManagement {

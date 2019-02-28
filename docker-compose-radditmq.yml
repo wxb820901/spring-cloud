@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+
+  rabbitmq:
+    image: "rabbitmq:management"
+    environment:
+      - RABBITMQ_DEFAULT_USER: admin
+      - RABBITMQ_DEFAULT_PASS: admin
+    port:
+      - "15672:15672"
+      - "5672:5672"
+      - "25672:25672"
+      - "1883:1883"
+
+      
+networks:
+  default:
+    external:
+      name: spring-cloud-network
