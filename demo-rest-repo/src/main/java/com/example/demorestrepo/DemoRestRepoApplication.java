@@ -22,7 +22,6 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
-@EnableDiscoveryClient
 public class DemoRestRepoApplication {
 
 	public static void main(String[] args) {
