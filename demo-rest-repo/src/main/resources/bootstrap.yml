@@ -18,7 +18,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59101
+  port: 59201
 eureka:
   client:
     serviceUrl:
@@ -46,7 +46,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59101
+  port: 59201
 eureka:
   client:
     serviceUrl:
@@ -75,7 +75,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59101
+  port: 59201
 eureka:
   client:
     serviceUrl:
@@ -103,7 +103,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59102
+  port: 59202
 eureka:
   client:
     serviceUrl:
