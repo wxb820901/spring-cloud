@@ -34,10 +34,7 @@ public class DemoStreamApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(DemoStreamApplication.class, args);
 	}
-	
 
-
-	
 	@Autowired
     @Qualifier("output")
     MessageChannel output;

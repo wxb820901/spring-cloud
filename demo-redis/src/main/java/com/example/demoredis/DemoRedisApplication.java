@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -25,8 +24,13 @@ public class DemoRedisApplication {
 
 
 
-    @GetMapping("/configMsg" )
+    @GetMapping("/persons" )
     public List<Person> getPersons(){
         return ps.getPersons();
+    }
+
+    @PostMapping("/person/{name}" )
+    public void getPersons(@PathVariable String name){
+        ps.save(name);
     }
 }
