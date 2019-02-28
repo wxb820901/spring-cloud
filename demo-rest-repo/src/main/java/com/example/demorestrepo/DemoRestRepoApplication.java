@@ -29,8 +29,9 @@ public class DemoRestRepoApplication {
 //		System.out.println("which profiles do you want? r1 or r2");
 //		Scanner scan = new Scanner(System.in);
 //		String profiles = scan.nextLine();
-		String profiles = System.getenv("ACTIVE_PROFILES");
-		new SpringApplicationBuilder(DemoRestRepoApplication.class).profiles(profiles).run(args);
+//		String profiles = System.getenv("ACTIVE_PROFILES");
+//		new SpringApplicationBuilder(DemoRestRepoApplication.class).profiles(profiles).run(args);
+		SpringApplication.run(DemoRestRepoApplication.class, args);
 	}
 	@Autowired
 	DataInitializer initializer;
