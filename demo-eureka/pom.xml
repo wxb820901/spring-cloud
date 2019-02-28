@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<docker.image.prefix>springio</docker.image.prefix>
+		<docker.image.prefix>demo</docker.image.prefix>
 		<spring-cloud.version>Greenwich.RC2</spring-cloud.version>
 	</properties>
 
