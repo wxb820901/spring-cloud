@@ -1,0 +1,97 @@
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  application:
+    name: config
+  profiles: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wxb820901/spring-cloud
+          label: master
+          username: wxb820901@gmail.com
+          password: '{cipher}AQBrTrEF4Un7/470mieaQZbXtYaoMAQNnB60669G4JogAKhStOQARjLMhdSbzLkWfaJ0yfPIi0ZWleLahti9NEci3j6GIf7PDqzH31yNWsvbmr4JPLMvbRtl0cF4uz9qGH2H2TV906YPTvluubo0cZ9EkhR/CEZWc+9jOmWF1xbkcQmAlnAQISWsVM2w+plxYUuZy2cAGn8NXGEWGSIeW1qgKUseemUUAn+glmvD2i+gyGIU/YQ3bnhxVhOzwZD94vYB3IhTSq7sl5+7TMTe7/xrZQJS6EAT66bYAzwVBljA7f8Yh4UNa/X/w7MaijE+dvfdKfuEjeJDyYeC4ofRx/uP/hWS9nSHwzBhCbpTwG86wrf2DOrghZir8r05WHQw0c0='
+        #"spring.cloud.config.server.encrypt.enabled=false"  make http://localhost:59001/demo-rest-repo/r1/master show encrypt properties as {cipher}AQB93CYZX6e... , which not decrypted version(must in bootstrap)
+        encrypt:
+          enabled: false
+server:
+  port: 59001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8762/eureka/
+security:
+  user:
+    name: billwang
+    password: 123456
+#generate jks and cp to resources folder
+#"C:\Program Files\Java\jdk1.8.0_191\bin\keytool" -genkeypair -alias testkey -keyalg RSA -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US" -keypass password -keystore server.jks -storepass password
+#eclipse IDE default do NOT cp server.jks, manually change setting of resources excluded @ project properties/java build path/tab Source/***resources/excluded
+encrypt:
+  keyStore:
+    location: classpath:server.jks
+    password: password
+    alias: testkey
+    secret: password
+---
+spring:
+  application:
+    name: config
+  profiles: dev-local
+  config:
+    server:
+      git:
+        uri: file://C:/Users/Bill_Wang/workspace
+      encrypt:
+        enabled: false
+server:
+  port: 59001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8762/eureka/
+security:
+  user:
+    name: billwang
+    password: 123456
+
+encrypt:
+  keyStore:
+    location: classpath:server.jks
+    password: password
+    alias: testkey
+    secret: password
+---
+spring:
+  application:
+    name: config
+  profiles: docker
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wxb820901/spring-cloud
+          label: master
+          username: wxb820901@gmail.com
+          password: '{cipher}AQBrTrEF4Un7/470mieaQZbXtYaoMAQNnB60669G4JogAKhStOQARjLMhdSbzLkWfaJ0yfPIi0ZWleLahti9NEci3j6GIf7PDqzH31yNWsvbmr4JPLMvbRtl0cF4uz9qGH2H2TV906YPTvluubo0cZ9EkhR/CEZWc+9jOmWF1xbkcQmAlnAQISWsVM2w+plxYUuZy2cAGn8NXGEWGSIeW1qgKUseemUUAn+glmvD2i+gyGIU/YQ3bnhxVhOzwZD94vYB3IhTSq7sl5+7TMTe7/xrZQJS6EAT66bYAzwVBljA7f8Yh4UNa/X/w7MaijE+dvfdKfuEjeJDyYeC4ofRx/uP/hWS9nSHwzBhCbpTwG86wrf2DOrghZir8r05WHQw0c0='
+        encrypt:
+          enabled: false
+server:
+  port: 59001
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8762/eureka/
+security:
+  user:
+    name: billwang
+    password: 123456
+encrypt:
+  keyStore:
+    location: classpath:server.jks
+    password: password
+    alias: testkey
+    secret: password
