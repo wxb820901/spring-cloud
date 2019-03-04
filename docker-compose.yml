@@ -12,7 +12,7 @@ services:
     port:
       - "59401:59401"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     depends_on:
       - redis
       - eureka
@@ -23,7 +23,7 @@ services:
     ports:
       - "8762:8762"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     
     
   config:
@@ -31,7 +31,7 @@ services:
     ports:
       - "59001:59001"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     depends_on:
       - eureka
 
@@ -62,7 +62,7 @@ services:
     ports:
       - "59301:59301"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     depends_on:
       - eureka
       - config
@@ -72,7 +72,7 @@ services:
     ports:
       - "59501:59501"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     depends_on:
       - eureka
       - config
@@ -84,7 +84,7 @@ services:
     ports:
       - "59101:59101"
     environment:
-      - spring_profiles_active: dev
+      - spring_profiles_active: docker
     depends_on:
       - eureka
       - config

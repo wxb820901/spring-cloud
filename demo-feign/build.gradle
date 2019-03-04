@@ -37,6 +37,7 @@ dependencies {
     implementation 'org.springframework.hateoas:spring-hateoas'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:testcontainers:1.10.6'
 }
 
 dependencyManagement {
