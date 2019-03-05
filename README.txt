@@ -51,3 +51,6 @@ docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
 / #ping config
 
+---------------------------------------multi coding and debug approach---------------------------------------------
+1, run main of each required module, and debug
+2, r

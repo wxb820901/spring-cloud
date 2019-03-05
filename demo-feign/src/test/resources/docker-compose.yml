@@ -18,6 +18,7 @@ services:
     image: "demo/demo-rest-repo"
     environment:
       - spring_profiles_active=docker-cluster-node1
+      -
     ports:
       - "59201:59201"
     depends_on:

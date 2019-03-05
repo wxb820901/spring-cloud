@@ -31,10 +31,15 @@ ext {
 }
 
 dependencies {
-    implementation 'com.example:demo-rest-repo:0.0.1-SNAPSHOT'
+//    implementation 'com.example:demo-rest-repo:0.0.1-SNAPSHOT'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
     implementation 'org.springframework.hateoas:spring-hateoas'
+    implementation 'org.springframework.retry:spring-retry'
+    compile 'com.example:demo-api:0.0.1-SNAPSHOT'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.testcontainers:testcontainers:1.10.6'
