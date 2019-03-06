@@ -95,7 +95,7 @@ server:
 
 demo-rest-repo:
   ribbon:
-    listOfServers: localhost:59201
+    listOfServers: localhost:59201,localhost:59202
     NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
     ReadTimeout: 5000
     MaxAutoRetries: 1000
