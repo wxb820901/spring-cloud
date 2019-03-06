@@ -93,12 +93,12 @@ server:
 #    serviceUrl:
 #      defaultZone: http://localhost:8762/eureka/
 
-demo-rest-repo:
-  ribbon:
-    listOfServers: localhost:59201
-    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
-    ReadTimeout: 5000
-    MaxAutoRetries: 1000
-    eureka:
-      enabled: false
+#demo-rest-repo:
+#  ribbon:
+#    listOfServers: localhost:59201
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    ReadTimeout: 5000
+#    MaxAutoRetries: 1000
+#    eureka:
+#      enabled: false
 # direct connect to rest-repo, since if through eureka, eureka will give a dynastic url

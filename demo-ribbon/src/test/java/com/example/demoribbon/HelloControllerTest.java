@@ -5,6 +5,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -19,7 +20,7 @@ import java.net.URL;
 import java.time.Duration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = DemoRibbonApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = DemoRibbonApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT )
 @TestPropertySource(locations = "classpath:application.properties")
 public class HelloControllerTest {
 
@@ -35,8 +36,9 @@ public class HelloControllerTest {
                     ;
 
 
-    @LocalServerPort
-    private int port;
+//    @LocalServerPort
+//    @Value("${local.server.port}")
+    private int port = 59601;
 
     private URL base;
 
@@ -54,7 +56,7 @@ public class HelloControllerTest {
     @Test
     public void test1(){
         ResponseEntity<String> response = this.restTemplate.getForEntity(
-                this.base.toString() + "/f", String.class, "");
+                this.base.toString() + "/configMsg", String.class, "");
         System.out.println(String.format("测试结果1为：%s", response.getBody()));
     }
 }

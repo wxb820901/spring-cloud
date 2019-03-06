@@ -29,6 +29,13 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+#
+#demo-rest-repo:
+#  ribbon:
+#    eureka:
+#      enabled: false
+#    listOfServers: localhost:59201,localhost:59202
+#    ServerListRefreshInterval: 15000
 ---
 spring:
   application:
