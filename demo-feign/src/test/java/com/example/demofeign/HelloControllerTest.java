@@ -2,6 +2,7 @@ package com.example.demofeign;
 
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,47 +20,23 @@ import java.io.File;
 import java.net.URL;
 import java.time.Duration;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = DemoFeignApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@TestPropertySource(locations = "classpath:application.properties")
+
 public class HelloControllerTest {
 
 
-    @ClassRule
-    public static DockerComposeContainer compose =
-            new DockerComposeContainer(
-                    new File("src/test/resources/docker-compose.yml"))
-//                    .withExposedService("eureka", 8762, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(3000)))
-//                    .withExposedService("config", 59001, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(3000)))
-//                    .withExposedService("rest-repo1", 59201, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(3000)))
-//                    .withExposedService("rest-repo2", 59202, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(3000)))
-                    .withExposedService("feign",
-                            59501,
-                            Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(300)))
-                    .withLocalCompose(true)
-                    ;
+    @Rule
+    public DockerComposeContainer compose =
+            new DockerComposeContainer(new File("src/test/resources/docker-compose.yml"))
+                    .withExposedService("rest-repo1", 59201, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(600)))
+                    .withExposedService("feign", 59501, Wait.forLogMessage(".*Started DemoFeignApplication.*\\n", 1))
+                    .withLocalCompose(true);
 
-
-//    @LocalServerPort
-    private int port = 59501;
-
-    private URL base;
-
-//    @Autowired
     private RestTemplate restTemplate = new RestTemplate();
 
-    @Before
-    public void setUp() throws Exception {
-        String url = String.format("http://localhost:%d/", port);
-        System.out.println(String.format("测试结果0为：%s", url));
-        this.base = new URL(url);
-
-    }
-
     @Test
-    public void test1(){
+    public void test1() {
         ResponseEntity<String> response = this.restTemplate.getForEntity(
-                this.base.toString() + "/configMsg", String.class, "");
+                "http://localhost:59501/configMsg", String.class, "");
         System.out.println(String.format("测试结果1为：%s", response.getBody()));
     }
 }

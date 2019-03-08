@@ -22,26 +22,26 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 @EnableFeignClients
 @EnableEurekaClient
-@RibbonClients
+//@RibbonClients
 @RestController
 @EnableCircuitBreaker
 public class DemoFeignApplication {
 
 	@Autowired
 	CustomersClient customersClient;
-	@Autowired
-	private Environment env;
+//	@Autowired
+//	private Environment env;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoFeignApplication.class, args);
 	}
-
-	@PostConstruct
-	public void init() {
-		System.out.println("====>"+customersClient.getCustomers());
-		System.out.println("====>"+customersClient.getCustomer(1l));
-		System.out.println("====>"+customersClient.getConfigMsg());
-	}
+//
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("====>"+customersClient.getCustomers());
+//		System.out.println("====>"+customersClient.getCustomer(1l));
+//		System.out.println("====>"+customersClient.getConfigMsg());
+//	}
 	
 	@HystrixCommand(fallbackMethod = "reliable")
 	@GetMapping("/configMsg" )

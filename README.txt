@@ -26,17 +26,17 @@ docker run -d --hostname localhost --name rabbit -e RABBITMQ_DEFAULT_USER=admin 
 docker run --name redis --network spring-cloud-network -p 6379:6379 -d redis redis-server --appendonly yes
 
 
----------------------------------------stop all and remove all----------------------------
+---------------------------------------stop all and remove all on win10----------------------------
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
-
+before using testcontainers integration test it should make sure docker compose container env clean
 ----------------------------------------start up app individual with network--------------------------------------------------
 above use --link connect each other
 below create network for it
 
 docker network create -d bridge spring-cloud-network
 
-abnd then 
+and then
 
 docker run --name eureka    --network  spring-cloud-network -p 8762:8762   springio/demo-eureka
 docker run --name config 	--network  spring-cloud-network -p 59001:59001 springio/demo-config
@@ -51,6 +51,24 @@ docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
 / #ping config
 
----------------------------------------multi coding and debug approach---------------------------------------------
-1, run main of each required module, and debug
-2, r
+---------------------------------------login a docker container and trouble shoot---------------------------------
+docker exec -it <container name> /bin/bash
+docker exec -it  /bin/bash
+---------------------------------------use testcontainers for integration test---------------------------------------------
+.withLocalCompose(true)
+
+or
+
+update ~/.testcontainers.properties, add compose.container.image = docker/compose:1.23.2
+"docker/compose:1.23.2" from docker-compose -v
+---------------------------------------debug experience between different module---------------------------------------------
+1, make sure local startup each spring cloud app is ok in IDE(eureka)
+2, make sure mvn install -pl xxx dockerfiel:build is all ok
+3, make sure docker-compose up is ok finally
+4, make sure testcontainers refer docker-compose.yml is ok
+
+*before each docker refer startup, clean the env ==> docker stop $(docker ps -a -q) and stop local IDE started items
+*@Rule and @ClassRule in junit has been set auto start and stop in @Before @BeforeClass and @After
+
+---------------------------------------debug experience single module---------------------------------------------
+How to fix spring boot app auto stop?  ==> check if import spring-boot-starter-web
