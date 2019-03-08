@@ -1,0 +1,15 @@
+
+demo-rest-repo:
+  ribbon:
+    ConnectTimeout: 250
+    MaxAutoRetries: 1000
+    MaxAutoRetriesNextServer: 2
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 1000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

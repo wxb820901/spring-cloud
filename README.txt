@@ -1,7 +1,7 @@
 ----------------------------------------build app and docker image---------------------------------------------
 mvn install dockerfile:build
 ---------------------------------------build from outer pom--------------------------------------
-mvn install -pl demo-api
+mvn install -pl demo-api                        -DskipTests
 mvn install -pl demo-stream dockerfile:build
 mvn install -pl demo-eureka dockerfile:build
 mvn install -pl demo-config dockerfile:build

@@ -1,28 +1,46 @@
 version: "3"
 services:
+
   eureka:
     image: "demo/demo-eureka"
     ports:
       - "8762:8762"
     environment:
-      - spring_profiles_active=docker
+      - "spring_profiles_active=docker"
+
+
   config:
     image: "demo/demo-config"
     ports:
       - "59001:59001"
     environment:
-      - spring_profiles_active=docker
+      - "spring_profiles_active=docker"
     depends_on:
       - eureka
+
+
   rest-repo1:
     image: "demo/demo-rest-repo"
     environment:
-      - spring_profiles_active=docker-cluster-node1
+      - "spring_profiles_active=docker"
     ports:
       - "59201:59201"
     depends_on:
       - eureka
       - config
+
+
+  ribbon:
+    image: "demo/demo-ribbon"
+    environment:
+      - "spring_profiles_active=docker"
+    ports:
+      - "59601:59601"
+    depends_on:
+      - eureka
+      - config
+      - rest-repo1
+
 
 networks:
   default:

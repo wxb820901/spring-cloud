@@ -27,6 +27,7 @@
 		<module>demo-stream</module>
         <module>demo-webflux</module>
 		<module>demo-redis</module>
+		<module>demo-ribbon</module>
 	</modules>
 
 	<!--<build>-->
