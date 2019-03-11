@@ -3,6 +3,9 @@ spring:
     active: dev
 ---
 spring:
+  redis:
+    port: 6379
+    host: localhost
   application:
     name: demo-redis
   profiles: dev
@@ -31,6 +34,9 @@ encrypt:
     secret: password
 ---
 spring:
+  redis:
+    port: 6379
+    host: redis
   application:
     name: demo-redis
   profiles: docker

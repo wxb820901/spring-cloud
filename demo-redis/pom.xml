@@ -21,6 +21,18 @@
 	</properties>
 
 	<dependencies>
+<!--
+import spring-core of 5.1.5.RELEAS for below bug:
+demo-redis_1  | 08:32:00.346 [main] ERROR org.springframework.boot.SpringApplication - Application run failed
+demo-redis_1  | java.lang.NoSuchMethodError: org.springframework.core.env.MutablePropertySources.stream()Ljava/util/stream/Stream;
+demo-redis_1  |         at org.springframework.boot.env.SpringApplicationJsonEnvironmentPostProcessor.postProcessEnvironment(SpringApplicationJsonEnvironmentPostProcessor.java:89)
+-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.1.5.RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
@@ -28,10 +40,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -56,6 +64,16 @@
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.oracle.java/jre -->
+		<dependency>
+			<groupId>com.oracle.java</groupId>
+			<artifactId>jre</artifactId>
+			<version>1.8.0_131</version>
+			<type>tgz</type>
+			<classifier>win64</classifier>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -114,5 +132,18 @@
 		</plugins>
 	</build>
 
+<!--https://artifacts.alfresco.com/nexus/content/repositories/public/-->
 
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+		<repository>
+			<id>spring-milestones2</id>
+			<name>Spring Milestones2</name>
+			<url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+		</repository>
+	</repositories>
 </project>

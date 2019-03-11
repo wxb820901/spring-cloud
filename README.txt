@@ -45,7 +45,8 @@ docker run --name stream    --network  spring-cloud-network -p 59301:59301 sprin
 docker run --name feign     --network  spring-cloud-network -p 8080:8080   springio/demo-feign
 docker run --name zuul      --network  spring-cloud-network -p 59101:59101 springio/demo-zuul
 ----------------------------------------start up all app by docker-compose --------------------------------------------------
-docker-compose up 
+docker-compose up
+docker-compose -f docker-compose-redis.yml up
 ---------------------------------------check network---------------------------------------------
 docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
