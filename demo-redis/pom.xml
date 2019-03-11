@@ -65,15 +65,6 @@ demo-redis_1  |         at org.springframework.boot.env.SpringApplicationJsonEnv
 			<artifactId>spring-retry</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.oracle.java/jre -->
-		<dependency>
-			<groupId>com.oracle.java</groupId>
-			<artifactId>jre</artifactId>
-			<version>1.8.0_131</version>
-			<type>tgz</type>
-			<classifier>win64</classifier>
-		</dependency>
-
 	</dependencies>
 
 	<dependencyManagement>

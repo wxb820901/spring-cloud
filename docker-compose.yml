@@ -75,11 +75,7 @@ services:
       - rest-repo2
       - feign
       - webflux
-#      - jedis
-      
-      
-      
-      
+
 networks:
   default:
     external:

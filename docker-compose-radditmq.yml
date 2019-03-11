@@ -1,6 +1,22 @@
 version: '3'
 services:
 
+  eureka:
+    image: "demo/demo-eureka"
+    ports:
+      - "8762:8762"
+    environment:
+      - "spring_profiles_active=docker"
+
+
+  config:
+    image: "demo/demo-config"
+    ports:
+      - "59001:59001"
+    environment:
+      - "spring_profiles_active=docker"
+    depends_on:
+      - eureka
 
   rabbitmq:
     image: "rabbitmq:management"
@@ -12,6 +28,7 @@ services:
       - "5672:5672"
       - "25672:25672"
       - "1883:1883"
+
 
       
 networks:
