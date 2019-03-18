@@ -33,6 +33,7 @@ public class DemoStreamApplication {
 
     @StreamListener(Distination.INPUT)
     public void recieve(Object payload){
+        System.out.println("received from kafka =======>"+payload);
         logger.info("received from kafka =======>"+payload);
     }
 
