@@ -17,8 +17,26 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
+
+    stream:
+      kafka:
+        binder:
+          brokers: 127.0.0.1:19092, 127.0.0.1:29092, 127.0.0.1:39092
+          zk-nodes: 127.0.0.1:12181, 127.0.0.1:22181, 127.0.0.1:32181
+          auto-create-topics: true
+          auto-add-partitions: true
+          min-partition-count: 1
+      bindings:
+        outputD:
+          destination: demo-stream
+#          content-type: text/plain
+        inputD:
+          destination: demo-stream
+#          content-type: text/plain
+#since kafka hostname got form zookeeper, since it's docke setting name kafka1, so it needs update C:\Windows\System32\drivers\etc add "127.0.0.1       kafka1"
+
 server:
-  port: 59301
+  port: 59701
 eureka:
   client:
     serviceUrl:
@@ -45,8 +63,24 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
+
+    stream:
+      kafka:
+        binder:
+          brokers: kafka-1:19092, kafka-2:29092, kafka-3:39092
+          zk-nodes: zookeeper-1:12181, zookeeper-2:22181, zookeeper-3:32181
+          auto-create-topics: true
+          auto-add-partitions: true
+          min-partition-count: 1
+      bindings:
+        outputD:
+          destination: demo-stream
+#          content-type: text/plain
+        inputD:
+          destination: demo-stream
+#          content-type: text/plain
 server:
-  port: 59301
+  port: 59701
 eureka:
   client:
     serviceUrl:

@@ -3,13 +3,13 @@ spring:
     active: dev
 ---
 spring:
-  redis:
-    port: 6379
-    host: localhost
   application:
-    name: demo-redis
+    name: demo-ribbon
   profiles: dev
   cloud:
+    loadbalancer:
+      retry:
+        enabled: true
     config:
       discovery:
         enabled: true
@@ -21,7 +21,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59401
+  port: 59601
 eureka:
   client:
     serviceUrl:
@@ -34,13 +34,13 @@ encrypt:
     secret: password
 ---
 spring:
-  redis:
-    port: 6379
-    host: redis
   application:
-    name: demo-redis
+    name: demo-ribbon
   profiles: docker
   cloud:
+    loadbalancer:
+      retry:
+        enabled: true
     config:
       discovery:
         enabled: true
@@ -52,7 +52,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59401
+  port: 59601
 eureka:
   client:
     serviceUrl:

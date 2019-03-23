@@ -57,3 +57,48 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+---
+spring:
+  application:
+    name: demo-feign
+  profiles: docker-unit-test
+  cloud:
+    config:
+      failFast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 1000
+        max-interval: 5000
+        multiplier: 1.1
+      enabled: true
+      name: demo-feign
+      profile: dev
+      label: master
+      uri: http://localhost:59001
+      username: billwang
+      password: '{cipher}AQA6Ov/ToKq5amRgXPof2gbbQyb9dBphJEAuiq1BA5byEed0CtOcWRS+sO8ejoxqFvSlVWN0e2A6BosUUwwFKTEIGVTnqgyHsP3kcHp9cqdeS75FqcWnXop+FLUoYvEFD3sJUVTCn/Zjqcdi0gj3sVEKxl+GS1jeJfs0t6cNCHvc2U7BA/13ujPyHYesX6/teLf5BZCHCt6FgbsmGB3/KZvf751lW6+LN2Xa05eWBTYzjNvo/JUPmh4odaihpw0Ebs6VMxoTOJwcGIu0ih16/ITICmA4tC0IO7sjtSGg8jq2YHRAcZJeBQtuzSNf8do0o01y2rUUsV6fDMiSf/mAwDJzbwyTf2Wsv7mofMwg6tlP2IM/Sk16kc1ZQd3JNQOeRDQ='
+# direct connect to config server, since if through eureka, eureka will give a dynastic url
+encrypt:
+  keyStore:
+    location: classpath:server.jks
+    password: password
+    alias: testkey
+    secret: password
+
+server:
+  port: 59501
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8762/eureka/
+
+#demo-rest-repo:
+#  ribbon:
+#    listOfServers: localhost:59201
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    ReadTimeout: 5000
+#    MaxAutoRetries: 1000
+#    eureka:
+#      enabled: false
+# direct connect to rest-repo, since if through eureka, eureka will give a dynastic url
