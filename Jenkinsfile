@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'begin build !!!'
         echo 'build over !!!'
-        sh 'java -version'
+        sh 'java -version && mvn -v'
       }
     }
   }
