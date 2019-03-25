@@ -1,0 +1,3 @@
+FROM jenkinsci/blueocean:latest
+USER root
+RUN apk update && apk add bash maven curl git gradle docker

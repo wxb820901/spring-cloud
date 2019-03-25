@@ -51,17 +51,9 @@ docker-compose -f docker-compose-redis.yml up
 docker run -it --rm --name busybox1 --network spring-cloud-network busybox sh
 <or docker attach --sig-proxy=false busybox1>
 / #ping config
-
 ---------------------------------------login a docker container and trouble shoot---------------------------------
 docker exec -it <container name> /bin/bash
 docker exec -it  /bin/bash
----------------------------------------use testcontainers for integration test---------------------------------------------
-.withLocalCompose(true)
-
-or
-
-update ~/.testcontainers.properties, add compose.container.image = docker/compose:1.23.2
-"docker/compose:1.23.2" from docker-compose -v
 ---------------------------------------debug experience between different module---------------------------------------------
 1, make sure local startup each spring cloud app is ok in IDE(eureka)
 2, make sure mvn install -pl xxx dockerfiel:build is all ok
@@ -70,6 +62,11 @@ update ~/.testcontainers.properties, add compose.container.image = docker/compos
 
 *before each docker refer startup, clean the env ==> docker stop $(docker ps -a -q) and stop local IDE started items
 *@Rule and @ClassRule in junit has been set auto start and stop in @Before @BeforeClass and @After
-
 ---------------------------------------debug experience single module---------------------------------------------
 How to fix spring boot app auto stop?  ==> check if import spring-boot-starter-web
+---------------------------------------github Personal access tokens----------------------------------------------
+ 736b161b9113c19033244e8078a38288fe415758
+ --------------------------------------build a docker image with maven--------------------------------------------
+ docker build -f Dockerfile-jenkins -t demo/demo-jenkins:v1 .
+ --------------------------------------startup jenkins------------------------------------------------------------
+ docker-compose -f docker-compose-jenkins.yml up

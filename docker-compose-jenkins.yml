@@ -1,0 +1,13 @@
+version: '2'
+services:
+  jenkins:
+    image: demo/demo-jenkins:v1
+    ports:
+      - "8080:8080"
+    volumes:
+      - D:\docker\jenkins\jenkins-data:/var/jenkins_home
+      - D:\docker\jenkins\docker.sock:/var/run/docker.sock
+      - D:\docker\jenkins\:/home
+
+
+
