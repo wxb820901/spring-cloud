@@ -65,8 +65,12 @@ docker exec -it  /bin/bash
 ---------------------------------------debug experience single module---------------------------------------------
 How to fix spring boot app auto stop?  ==> check if import spring-boot-starter-web
 ---------------------------------------github Personal access tokens----------------------------------------------
- 736b161b9113c19033244e8078a38288fe415758
- --------------------------------------build a docker image with maven--------------------------------------------
+736b161b9113c19033244e8078a38288fe415758
+--------------------------------------build a docker image with maven--------------------------------------------
  docker build -f Dockerfile-jenkins -t demo/demo-jenkins:v1 .
- --------------------------------------startup jenkins------------------------------------------------------------
+--------------------------------------startup jenkins------------------------------------------------------------
  docker-compose -f docker-compose-jenkins.yml up
+--------------------------------------jenkins new dashboard------------------------------------------------------
+http://localhost:8080/blue
+--------------------------------------jenkins old dashboard------------------------------------------------------
+http://localhost:8080
