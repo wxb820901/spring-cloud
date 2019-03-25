@@ -3,7 +3,9 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        powershell(script: 'mvn clean install -pl demo-eureka dockerfile:build;mvn clean install -pl demo-config dockerfile:build', returnStatus: true, returnStdout: true, label: 'build')
+        echo 'begin build !!!'
+        echo 'build over !!!'
+        sh 'mvn clean install -pl demo-eureka dockerfile:build;mvn clean install -pl demo-config dockerfile:build'
       }
     }
   }
