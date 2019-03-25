@@ -4,8 +4,8 @@ pipeline {
     stage('build') {
       steps {
         echo 'begin build !!!'
+        sh 'mvn clean install -pl demo-eureka dockerfile:build && mvn clean install -pl demo-config dockerfile:build'
         echo 'build over !!!'
-        sh 'mvn clean install -pl demo-eureka dockerfile:build;mvn clean install -pl demo-config dockerfile:build'
       }
     }
   }
