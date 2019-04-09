@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: dev
+
+
+  jpa:
+    show-sql: true
 ---
 spring:
   application:

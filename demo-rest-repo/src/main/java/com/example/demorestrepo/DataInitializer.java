@@ -1,11 +1,14 @@
 package com.example.demorestrepo;
 
 import com.example.demorestrepo.entity.Customer;
+import com.example.demorestrepo.entity.CustomerGroup;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Component
@@ -14,12 +17,16 @@ public class DataInitializer {
 
 //    private final @NonNull OrderRepository orders;
     @Autowired
-    private @NonNull CustomerRepository customers;
+    private @NonNull CustomerRepository customerRepository;
+    @Autowired
+    private @NonNull CustomerGroupRepository customerGroupRepository;
+
 
 
     @Transactional("customerTransactionManager")
-    public Customer.CustomerId initializeCustomer() {
-        return customers.save(new Customer("Dave", "Matthews")).getId();
+    public Customer initializeCustomer() {
+        CustomerGroup customerGroup = new CustomerGroup("Gxxx");
+        return customerRepository.save(new Customer("Dave", "Matthews", customerGroup));
     }
 
 

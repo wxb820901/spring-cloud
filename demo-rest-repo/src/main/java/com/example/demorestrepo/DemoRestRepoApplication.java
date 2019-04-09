@@ -2,6 +2,7 @@ package com.example.demorestrepo;
 
 
 import com.example.demorestrepo.entity.Customer;
+import com.example.demorestrepo.entity.CustomerGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -40,8 +41,8 @@ public class DemoRestRepoApplication {
 
 	@PostConstruct
 	public void init() {
-
-		Customer.CustomerId customerId = initializer.initializeCustomer();
+		Customer customer = initializer.initializeCustomer();
+		System.out.println("init customer ===> "+customer);
 //		initializer.initializeOrder(customerId);
 	}
 

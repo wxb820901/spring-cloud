@@ -1,47 +1,37 @@
 package com.example.demorestrepo.entity;
 
-import lombok.*;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @EqualsAndHashCode(of = "id")
-@Getter
-@ToString
+@Data
+@NoArgsConstructor
 public class Customer {
 
-    private @Id @GeneratedValue Long id;
-    private final String firstname, lastname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String firstname, lastname;
 
-    public Customer() {
-        this.firstname = null;
-        this.lastname = null;
-    }
 
     public Customer(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public CustomerId getId() {
-        return new CustomerId();
+    public Customer(String firstname, String lastname, CustomerGroup cg) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.CustomerGroups.add(cg);
     }
 
-    @Value
-    @Embeddable
-    @RequiredArgsConstructor
-    @SuppressWarnings("serial")
-    public static class CustomerId implements Serializable {
-
-        private final Long customerId;
-
-        CustomerId() {
-            this.customerId = null;
-        }
-    }
+    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<CustomerGroup> CustomerGroups = new HashSet();
 }
