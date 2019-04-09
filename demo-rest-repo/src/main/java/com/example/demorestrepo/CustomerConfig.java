@@ -17,7 +17,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 
 @Configuration
-@EnableJpaRepositories(entityManagerFactoryRef = "customerEntityManagerFactory",
+@EnableJpaRepositories(
+        entityManagerFactoryRef = "customerEntityManagerFactory",
         transactionManagerRef = "customerTransactionManager")
 class CustomerConfig {
 
@@ -45,7 +46,7 @@ class CustomerConfig {
     DataSource customerDataSource() {
 
         return new EmbeddedDatabaseBuilder().//
-                setType(EmbeddedDatabaseType.HSQL).//
+                setType(EmbeddedDatabaseType.H2).//
                 setName("customers").//
                 build();
     }
