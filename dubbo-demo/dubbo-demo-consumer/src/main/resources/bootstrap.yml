@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  application:
+    name: dubbo-demo-customer
+#  dubbo:
+#    server: true
+#    registry:
+#      protocol: zookeeper
+#      address: 127.0.0.1:12181
+  profiles: dev
+
+server:
+  port: 8081
+
