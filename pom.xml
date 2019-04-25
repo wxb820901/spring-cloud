@@ -28,6 +28,7 @@
         <module>demo-webflux</module>
 		<module>demo-redis</module>
 		<module>demo-ribbon</module>
+		<module>dubbo-demo</module>
 	</modules>
 
 	<!--<build>-->
