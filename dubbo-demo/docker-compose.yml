@@ -40,20 +40,25 @@ services:
       ZOOKEEPER_SERVERS: zookeeper-1:12888:13888;zookeeper-2:22888:23888;zookeeper-3:32888:33888
 
 
-#  demo-stream:
-#    image: "demo/demo-stream"
-#    depends_on:
-#      - config
-#      - kafka-1
-#      - kafka-2
-#      - kafka-3
-##      - rabbitmq
-#    ports:
-#      - "59701:59701"
-#    environment:
-#      - "spring_profiles_active=docker"
-#    restart: always
-#
+  dubbo-demo-provider:
+    image: "demo/dubbo-demo-provider:latest"
+    ports:
+      - "12345:12345"
+    restart: always
+
+  dubbo-demo-consumer:
+    image: "demo/dubbo-demo-consumer:latest"
+    depends_on:
+      - zookeeper-1
+      - zookeeper-2
+      - zookeeper-3
+      - dubbo-demo-provider
+    ports:
+      - "18081:18081"
+    environment:
+      - "spring_profiles_active=docker"
+    restart: always
+
 
 
 networks:

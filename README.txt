@@ -10,6 +10,10 @@ mvn clean install -pl demo-feign dockerfile:build
 mvn clean install -pl demo-zuul dockerfile:build
 mvn clean install -pl demo-redis dockerfile:build
 mvn clean install -pl demo-webflux dockerfile:build
+
+mvn install -pl dubbo-demo/dubbo-demo-provider dockerfile:build
+mvn install -pl dubbo-demo/dubbo-demo-consumer dockerfile:build
+
 ----------------------------------------start up app individual with link--------------------------------------------------
 docker run --name eureka                         -p 8762:8762   springio/demo-eureka
 docker run --name config    --link eureka        -p 59001:59001 springio/demo-config
