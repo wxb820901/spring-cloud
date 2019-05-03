@@ -7,6 +7,8 @@ services:
       - "8762:8762"
     environment:
       - "spring_profiles_active=docker"
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
     
     
   config:
@@ -17,6 +19,8 @@ services:
       - "spring_profiles_active=docker"
     depends_on:
       - eureka
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
 
     
   rest-repo1:
@@ -25,11 +29,12 @@ services:
       - "spring_profiles_active=docker-cluster-node1"
     ports:
       - "59201:59201"
-      - "59299:59299"
     depends_on:
       - eureka
       - config
-
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
+      - D:\docker\logs\demo-rest-repo\docker-cluster-node1:/var/log
     
   rest-repo2:
     image: "demo/demo-rest-repo"
@@ -37,10 +42,12 @@ services:
       - "spring_profiles_active=docker-cluster-node2"
     ports:
       - "59202:59202"
-      - "59298:59298"
     depends_on:
       - eureka
-      - config    
+      - config
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
+      - D:\docker\logs\demo-rest-repo\docker-cluster-node2:/var/log
 #
 #  webflux:
 #    image: "demo/demo-webflux"

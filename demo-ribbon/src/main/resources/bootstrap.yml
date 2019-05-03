@@ -32,6 +32,8 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: ./logs
 ---
 spring:
   application:
@@ -63,3 +65,5 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: /var/log
