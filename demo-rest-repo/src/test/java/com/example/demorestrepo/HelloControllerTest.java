@@ -17,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URL;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoRestRepoApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -39,15 +41,27 @@ public class HelloControllerTest {
 
     @Test
     public void test1() throws Exception {
+
+        ResponseEntity<String> configMsg = this.restTemplate.getForEntity(
+                this.base.toString() + "/configMsg", String.class);
+        System.out.println(String.format("测试结果get configMsg为：%s", configMsg.getBody()+"|"+configMsg.getHeaders()));
+
 //save customer with group
-        CustomerGroup cg1 = new CustomerGroup("group1");
-        Customer cus1 = new Customer("fn1","ln1", cg1);
+        CustomerGroup cg1 = new CustomerGroup();
+        cg1.setGroupName("group1");
+
+        ResponseEntity<CustomerGroup> responseCusg = this.restTemplate.postForEntity(
+                this.base.toString() + "/customerGroups", cg1, CustomerGroup.class);
+        System.out.println(String.format("测试结果post CustomerGroup 为：%s", responseCusg.getBody()+"|"+responseCusg.getHeaders()));
+        Customer cus1 = new Customer();
+        cus1.setFirstname("fn1");
+        cus1.setLastname("ln1");
+        cus1.setGroupId(responseCusg.getBody().getId());
         ResponseEntity<Customer> responseCus = this.restTemplate.postForEntity(
                 this.base.toString() + "/customers", cus1, Customer.class);
         System.out.println(String.format("测试结果post cus 为：%s", responseCus.getBody()+"|"+responseCus.getHeaders()));
 //update group for just post customer
         cus1 = responseCus.getBody();
-        cus1.getCustomerGroups().add(new CustomerGroup("group2"));
         HttpEntity<Customer> requestEntity = new HttpEntity<>(cus1);
         ResponseEntity<Customer> responseUpdate = restTemplate.exchange(
                 this.base.toString() + "/customers"+"/"+cus1.getId(),
@@ -55,7 +69,6 @@ public class HelloControllerTest {
         System.out.println(String.format("测试结果update cus 为：%s", responseUpdate.getBody()));
 
         cus1 = responseUpdate.getBody();
-        cus1.setCustomerGroups(null);
         requestEntity = new HttpEntity<>(cus1);
         responseUpdate = restTemplate.exchange(
                 this.base.toString() + "/customers"+"/"+cus1.getId(),
@@ -63,11 +76,8 @@ public class HelloControllerTest {
         System.out.println(String.format("测试结果update cus 为：%s", responseUpdate.getBody()));
 
 
-//delete group for just post customer
-//if not delete customer first==>Referential integrity constraint violation: "FK8VKNDL4IX5U2985M6MRRKGEW1: PUBLIC.CUSTOMER_CUSTOMERGROUP FOREIGN KEY(CUSTOMERGROUPS_ID) REFERENCES PUBLIC.CUSTOMERGROUP(ID) (2)"; SQL statement:
-
         restTemplate.delete(
-                this.base.toString() + "/customerGroups"+"/"+2);
+                this.base.toString() + "/customerGroups/2");
 
 
 

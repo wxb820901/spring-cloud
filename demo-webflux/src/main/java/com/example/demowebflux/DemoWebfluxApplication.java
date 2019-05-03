@@ -25,12 +25,21 @@ public class DemoWebfluxApplication {
 
 	@GetMapping("/{id}")
 	private Mono<Customer> getCustomerById(@PathVariable String id) {
-		return Mono.just(new Customer("firstName","lastName"));
+		Customer customer = new Customer();
+		customer.setLastname("firstName");
+		customer.setLastname("lastName");
+		return Mono.just(customer);
 	}
 
 	@GetMapping
 	private Flux<Customer> getAllEmployees() {
-		return Flux.fromIterable(Arrays.asList(new Customer("AkkName1","AllName1"), new Customer("AkkName2","AllName2")));
+		Customer customer1 = new Customer();
+		customer1.setLastname("AkkName1");
+		customer1.setLastname("AllName1");
+		Customer customer2 = new Customer();
+		customer2.setLastname("AkkName2");
+		customer2.setLastname("AllName2");
+		return Flux.fromIterable(Arrays.asList(customer1,customer2));
 	}
 
 }

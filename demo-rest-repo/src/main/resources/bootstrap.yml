@@ -68,6 +68,9 @@ spring:
     name: demo-rest-repo
   profiles: docker-cluster-node1
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:59299
     config:
       discovery:
         enabled: true
@@ -90,12 +93,17 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+
+
 ---
 spring:
   application:
     name: demo-rest-repo
   profiles: docker-cluster-node2
   cloud:
+    sentinel:
+      transport:
+        dashboard: http://localhost:59298
     config:
       discovery:
         enabled: true

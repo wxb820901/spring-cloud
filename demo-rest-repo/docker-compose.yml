@@ -25,6 +25,7 @@ services:
       - "spring_profiles_active=docker-cluster-node1"
     ports:
       - "59201:59201"
+      - "59299:59299"
     depends_on:
       - eureka
       - config
@@ -36,45 +37,46 @@ services:
       - "spring_profiles_active=docker-cluster-node2"
     ports:
       - "59202:59202"
+      - "59298:59298"
     depends_on:
       - eureka
       - config    
-      
-  webflux:
-    image: "demo/demo-webflux"
-    ports:
-      - "59301:59301"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
-      - config
-
-  feign:
-    image: "demo/demo-feign"
-    ports:
-      - "59501:59501"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
-      - config
-      - rest-repo1
-      - rest-repo2
-
-  zuul:
-    image: "demo/demo-zuul"
-    ports:
-      - "59101:59101"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
-      - config
-      - rest-repo1
-      - rest-repo2
-      - feign
-      - webflux
+#
+#  webflux:
+#    image: "demo/demo-webflux"
+#    ports:
+#      - "59301:59301"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#
+#  feign:
+#    image: "demo/demo-feign"
+#    ports:
+#      - "59501:59501"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#      - rest-repo1
+#      - rest-repo2
+#
+#  zuul:
+#    image: "demo/demo-zuul"
+#    ports:
+#      - "59101:59101"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#      - rest-repo1
+#      - rest-repo2
+#      - feign
+#      - webflux
 
 networks:
   default:
