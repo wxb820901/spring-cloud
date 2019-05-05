@@ -22,6 +22,7 @@
 		<module>demo-eureka</module>
 		<module>demo-config</module>
 		<module>demo-zuul</module>
+		<module>demo-gateway</module>
 		<module>demo-rest-repo</module>
 		<module>demo-feign</module>
 		<module>demo-stream</module>
