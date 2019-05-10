@@ -15,11 +15,8 @@ management:
       enabled: false
 ---
 spring:
-  redis:
-    port: 6379
-    host: localhost
   application:
-    name: demo-redis
+    name: admin
   profiles: dev
   cloud:
     config:
@@ -33,7 +30,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59401
+  port: 59801
 eureka:
   client:
     serviceUrl:
@@ -44,15 +41,10 @@ encrypt:
     password: password
     alias: testkey
     secret: password
-logging:
-  path: ./logs
 ---
 spring:
-  redis:
-    port: 6379
-    host: redis
   application:
-    name: demo-redis
+    name: admin
   profiles: docker
   cloud:
     config:
@@ -66,7 +58,7 @@ spring:
         max-interval: 5000
         multiplier: 1.1
 server:
-  port: 59401
+  port: 59801
 eureka:
   client:
     serviceUrl:

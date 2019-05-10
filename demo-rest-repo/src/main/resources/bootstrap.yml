@@ -1,11 +1,8 @@
 spring:
   profiles:
     active: dev
-
-
   jpa:
     show-sql: true
-
 # actuator setting for spring boot admin
 management:
   endpoints:
@@ -18,7 +15,6 @@ management:
   health:
     redis:
       enabled: false
-
 ---
 spring:
   application:
@@ -35,12 +31,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://localhost:59801
-
 server:
   port: 59201
 eureka:
@@ -55,8 +45,6 @@ encrypt:
     secret: password
 logging:
   path: ./logs
-
-
 
 ---
 spring:
@@ -74,11 +62,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://admin:59801
 server:
   port: 59201
 eureka:
@@ -109,11 +92,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://admin:59801
 server:
   port: 59201
 eureka:
@@ -144,11 +122,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://admin:59801
 server:
   port: 59202
 eureka:

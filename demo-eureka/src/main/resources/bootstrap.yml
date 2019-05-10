@@ -19,11 +19,6 @@ spring:
   application:
     name: eureka
   profiles: dev
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://localhost:59801
 server:
   port: 8762
 eureka:
@@ -37,16 +32,10 @@ eureka:
 logging:
   path: ./logs
 ---
-
 spring:
   application:
     name: eureka
   profiles: docker
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://admin:59801
 server:
   port: 8762
 eureka:

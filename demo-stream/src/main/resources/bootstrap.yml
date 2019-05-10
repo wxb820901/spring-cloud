@@ -29,13 +29,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://localhost:59801
-
-
     stream:
       kafka:
         binder:
@@ -81,11 +74,6 @@ spring:
         max-attempts: 1000
         max-interval: 5000
         multiplier: 1.1
-  #for spring boot admin
-  boot:
-    admin:
-      client:
-        url: http://localhost:59801
     stream:
       kafka:
         binder:
