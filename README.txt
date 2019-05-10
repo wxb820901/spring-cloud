@@ -79,8 +79,5 @@ How to fix spring boot app auto stop?  ==> check if import spring-boot-starter-w
 http://localhost:8080/blue
 --------------------------------------jenkins old dashboard------------------------------------------------------
 http://localhost:8080
-
-
-
 --------------------------------------start casandra cluster------------------------------------------------------
  docker-compose -f docker-compose-cassandra.yml up
