@@ -1,6 +1,14 @@
 version: '3'
 services:
 
+  admin:
+    mage: "demo/demo-admin"
+      ports:
+        - "59801:59801"
+      environment:
+        - "spring_profiles_active=docker"
+      volumes:
+        - D:\docker\logs\csp:/root/logs/csp
   eureka:
     image: "demo/demo-eureka"
     ports:

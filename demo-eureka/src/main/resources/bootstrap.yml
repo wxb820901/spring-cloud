@@ -1,14 +1,29 @@
 spring:
   profiles:
     active: dev
-
+# actuator setting for spring boot admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: false
 ---
 
 spring:
   application:
     name: eureka
   profiles: dev
-
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:59801
 server:
   port: 8762
 eureka:
@@ -27,7 +42,11 @@ spring:
   application:
     name: eureka
   profiles: docker
-
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://admin:59801
 server:
   port: 8762
 eureka:

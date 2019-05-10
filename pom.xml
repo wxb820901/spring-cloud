@@ -30,6 +30,7 @@
 		<module>demo-redis</module>
 		<module>demo-ribbon</module>
 		<module>dubbo-demo</module>
+		<module>demo-admin</module>
 	</modules>
 
 </project>

@@ -1,6 +1,18 @@
 spring:
   profiles:
     active: dev
+# actuator setting for spring boot admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: false
 ---
 spring:
   application:
@@ -17,6 +29,11 @@ spring:
         #"spring.cloud.config.server.encrypt.enabled=false"  make http://localhost:59001/demo-rest-repo/r1/master show encrypt properties as {cipher}AQB93CYZX6e... , which not decrypted version(must in bootstrap)
         encrypt:
           enabled: false
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:59801
 server:
   port: 59001
 eureka:
@@ -45,6 +62,11 @@ spring:
         uri: file://C:/Users/Bill_Wang/workspace
       encrypt:
         enabled: false
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:59801
 server:
   port: 59001
 eureka:
@@ -74,6 +96,12 @@ spring:
           password: '{cipher}AQBrTrEF4Un7/470mieaQZbXtYaoMAQNnB60669G4JogAKhStOQARjLMhdSbzLkWfaJ0yfPIi0ZWleLahti9NEci3j6GIf7PDqzH31yNWsvbmr4JPLMvbRtl0cF4uz9qGH2H2TV906YPTvluubo0cZ9EkhR/CEZWc+9jOmWF1xbkcQmAlnAQISWsVM2w+plxYUuZy2cAGn8NXGEWGSIeW1qgKUseemUUAn+glmvD2i+gyGIU/YQ3bnhxVhOzwZD94vYB3IhTSq7sl5+7TMTe7/xrZQJS6EAT66bYAzwVBljA7f8Yh4UNa/X/w7MaijE+dvfdKfuEjeJDyYeC4ofRx/uP/hWS9nSHwzBhCbpTwG86wrf2DOrghZir8r05WHQw0c0='
         encrypt:
           enabled: false
+
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://admin:59801
 server:
   port: 59001
 eureka:

@@ -11,6 +11,7 @@ mvn clean install -pl demo-zuul dockerfile:build        -DskipTests
 mvn clean install -pl demo-gateway dockerfile:build     -DskipTests
 mvn clean install -pl demo-redis dockerfile:build       -DskipTests
 mvn clean install -pl demo-webflux dockerfile:build     -DskipTests
+mvn clean install -pl demo-admin dockerfile:build       -DskipTests
 mvn clean install -pl dubbo-demo/dubbo-demo-provider dockerfile:build  -DskipTests
 mvn clean install -pl dubbo-demo/dubbo-demo-consumer dockerfile:build  -DskipTests
 
