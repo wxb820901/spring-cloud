@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Component
@@ -25,8 +28,15 @@ public class DataInitializer {
 
     @Transactional("customerTransactionManager")
     public Customer initializeCustomer() {
-        CustomerGroup customerGroup = new CustomerGroup("Gxxx");
-        return customerRepository.save(new Customer("Dave", "Matthews", customerGroup));
+        CustomerGroup customerGroup = new CustomerGroup();
+        customerGroup.setGroupName("Gxxx");
+        customerGroupRepository.save(customerGroup);
+        Customer customer = new Customer();
+        customer.setFirstname("Dave");
+        customer.setLastname("Matthews");
+        customer.setGroupId(customerGroup.getId());
+        customerRepository.save(customer);
+        return customer;
     }
 
 

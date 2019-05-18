@@ -2,14 +2,19 @@
 mvn install dockerfile:build
 ---------------------------------------build from outer pom--------------------------------------
 mvn clean install -pl demo-api                          -DskipTests
-mvn clean install -pl demo-stream dockerfile:build
-mvn clean install -pl demo-eureka dockerfile:build
-mvn clean install -pl demo-config dockerfile:build
-mvn clean install -pl demo-rest-repo dockerfile:build
-mvn clean install -pl demo-feign dockerfile:build
-mvn clean install -pl demo-zuul dockerfile:build
-mvn clean install -pl demo-redis dockerfile:build
-mvn clean install -pl demo-webflux dockerfile:build
+mvn clean install -pl demo-stream dockerfile:build      -DskipTests
+mvn clean install -pl demo-eureka dockerfile:build      -DskipTests
+mvn clean install -pl demo-config dockerfile:build      -DskipTests
+mvn clean install -pl demo-rest-repo dockerfile:build   -DskipTests
+mvn clean install -pl demo-feign dockerfile:build       -DskipTests
+mvn clean install -pl demo-zuul dockerfile:build        -DskipTests
+mvn clean install -pl demo-gateway dockerfile:build     -DskipTests
+mvn clean install -pl demo-redis dockerfile:build       -DskipTests
+mvn clean install -pl demo-webflux dockerfile:build     -DskipTests
+mvn clean install -pl demo-admin dockerfile:build       -DskipTests
+mvn clean install -pl dubbo-demo/dubbo-demo-provider dockerfile:build  -DskipTests
+mvn clean install -pl dubbo-demo/dubbo-demo-consumer dockerfile:build  -DskipTests
+
 ----------------------------------------start up app individual with link--------------------------------------------------
 docker run --name eureka                         -p 8762:8762   springio/demo-eureka
 docker run --name config    --link eureka        -p 59001:59001 springio/demo-config
@@ -26,7 +31,7 @@ docker run -d --hostname localhost --name rabbit -e RABBITMQ_DEFAULT_USER=admin 
 docker run --name redis --network spring-cloud-network -p 6379:6379 -d redis redis-server --appendonly yes
 
 
----------------------------------------stop all and remove all on win10----------------------------
+---------------------------------------stop all and remove all on win powershell----------------------------
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 before using testcontainers integration test it should make sure docker compose container env clean
@@ -74,3 +79,5 @@ How to fix spring boot app auto stop?  ==> check if import spring-boot-starter-w
 http://localhost:8080/blue
 --------------------------------------jenkins old dashboard------------------------------------------------------
 http://localhost:8080
+--------------------------------------start casandra cluster------------------------------------------------------
+ docker-compose -f docker-compose-cassandra.yml up

@@ -1,6 +1,18 @@
 spring:
   profiles:
     active: dev
+# actuator setting for spring boot admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: false
 ---
 spring:
   application:
@@ -57,3 +69,5 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: /var/log

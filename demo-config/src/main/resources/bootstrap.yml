@@ -1,6 +1,18 @@
 spring:
   profiles:
     active: dev
+# actuator setting for spring boot admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    redis:
+      enabled: false
 ---
 spring:
   application:
@@ -32,6 +44,8 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: ./logs
 ---
 spring:
   application:
@@ -43,6 +57,11 @@ spring:
         uri: file://C:/Users/Bill_Wang/workspace
       encrypt:
         enabled: false
+  #for spring boot admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:59801
 server:
   port: 59001
 eureka:
@@ -55,6 +74,8 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: /var/log
 ---
 spring:
   application:
@@ -82,3 +103,5 @@ encrypt:
     password: password
     alias: testkey
     secret: password
+logging:
+  path: /var/log

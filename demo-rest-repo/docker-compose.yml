@@ -1,12 +1,22 @@
 version: '3'
 services:
 
+  admin:
+    mage: "demo/demo-admin"
+      ports:
+        - "59801:59801"
+      environment:
+        - "spring_profiles_active=docker"
+      volumes:
+        - D:\docker\logs\csp:/root/logs/csp
   eureka:
     image: "demo/demo-eureka"
     ports:
       - "8762:8762"
     environment:
       - "spring_profiles_active=docker"
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
     
     
   config:
@@ -17,6 +27,8 @@ services:
       - "spring_profiles_active=docker"
     depends_on:
       - eureka
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
 
     
   rest-repo1:
@@ -28,7 +40,9 @@ services:
     depends_on:
       - eureka
       - config
-
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
+      - D:\docker\logs\demo-rest-repo\docker-cluster-node1:/var/log
     
   rest-repo2:
     image: "demo/demo-rest-repo"
@@ -38,43 +52,46 @@ services:
       - "59202:59202"
     depends_on:
       - eureka
-      - config    
-      
-  webflux:
-    image: "demo/demo-webflux"
-    ports:
-      - "59301:59301"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
       - config
-
-  feign:
-    image: "demo/demo-feign"
-    ports:
-      - "59501:59501"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
-      - config
-      - rest-repo1
-      - rest-repo2
-
-  zuul:
-    image: "demo/demo-zuul"
-    ports:
-      - "59101:59101"
-    environment:
-      - "spring_profiles_active=docker"
-    depends_on:
-      - eureka
-      - config
-      - rest-repo1
-      - rest-repo2
-      - feign
-      - webflux
+    volumes:
+      - D:\docker\logs\csp:/root/logs/csp
+      - D:\docker\logs\demo-rest-repo\docker-cluster-node2:/var/log
+#
+#  webflux:
+#    image: "demo/demo-webflux"
+#    ports:
+#      - "59301:59301"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#
+#  feign:
+#    image: "demo/demo-feign"
+#    ports:
+#      - "59501:59501"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#      - rest-repo1
+#      - rest-repo2
+#
+#  zuul:
+#    image: "demo/demo-zuul"
+#    ports:
+#      - "59101:59101"
+#    environment:
+#      - "spring_profiles_active=docker"
+#    depends_on:
+#      - eureka
+#      - config
+#      - rest-repo1
+#      - rest-repo2
+#      - feign
+#      - webflux
 
 networks:
   default:

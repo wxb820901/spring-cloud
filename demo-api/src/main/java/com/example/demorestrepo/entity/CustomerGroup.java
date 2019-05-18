@@ -3,6 +3,8 @@ package com.example.demorestrepo.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,16 +16,12 @@ import java.util.Set;
 @NoArgsConstructor
 public class CustomerGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String groupName;
 
-    public CustomerGroup(String groupName) {
-        this.groupName = groupName;
-    }
-
-
-    @ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name = "groupId")
     private Set<Customer> customers = new HashSet();
 }
