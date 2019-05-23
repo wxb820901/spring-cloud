@@ -4,13 +4,7 @@ package com.example.demorestrepo.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @EqualsAndHashCode(of = "id")

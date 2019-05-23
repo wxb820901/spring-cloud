@@ -1,13 +1,14 @@
 package com.example;
 
-import org.apache.dubbo.config.annotation.Reference;
+
+import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
 
-    @Reference(url = "dubbo://${dubbo.provider.hostname}:12345")
+    @Reference
     private DemoService demoService;
 
     @RequestMapping("/sayHello")
