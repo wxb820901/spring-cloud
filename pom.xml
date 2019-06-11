@@ -19,6 +19,7 @@
 		<module>demo-stream</module>
         <module>demo-webflux</module>
 		<module>demo-redis</module>
+		<module>demo-mongodb</module>
 		<module>demo-ribbon</module>
 		<module>dubbo-demo</module>
 		<module>demo-admin</module>
