@@ -23,5 +23,6 @@
 		<module>demo-ribbon</module>
 		<module>dubbo-demo</module>
 		<module>demo-admin</module>
+        <module>aws</module>
     </modules>
 </project>
