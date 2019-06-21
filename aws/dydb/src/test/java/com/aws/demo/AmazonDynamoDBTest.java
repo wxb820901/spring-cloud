@@ -1,4 +1,5 @@
 package com.aws.demo;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -54,12 +55,10 @@ public class AmazonDynamoDBTest {
                     new ProvisionedThroughput(10L, 10L));
             table.waitForActive();
             System.out.println("Success.  Table status: " + table.getDescription().getTableStatus());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Unable to create table: ");
             System.err.println(e.getMessage());
         }
-
 
 
         //load data
@@ -70,24 +69,23 @@ public class AmazonDynamoDBTest {
         JsonNode currentNode;
 
 
-            currentNode = iter.next();
-            int year = currentNode.asInt();
-            currentNode = iter.next();
-            String title = currentNode.asText();
+        currentNode = iter.next();
+        int year = currentNode.asInt();
+        currentNode = iter.next();
+        String title = currentNode.asText();
 
-            currentNode = iter.next();
-            String info = currentNode.toString();
-            try {
+        currentNode = iter.next();
+        String info = currentNode.toString();
+        try {
 
-                table.putItem(new Item().withPrimaryKey("year", year, "title", title).withJSON("info",
-                        info));
-                System.out.println("PutItem succeeded: " + year + " " + title);
-            }
-            catch (Exception e) {
-                System.err.println("Unable to add movie: " + year + " " + title);
-                System.err.println(e.getMessage());
+            table.putItem(new Item().withPrimaryKey("year", year, "title", title).withJSON("info",
+                    info));
+            System.out.println("PutItem succeeded: " + year + " " + title);
+        } catch (Exception e) {
+            System.err.println("Unable to add movie: " + year + " " + title);
+            System.err.println(e.getMessage());
 
-            }
+        }
 
         parser.close();
 
@@ -107,8 +105,7 @@ public class AmazonDynamoDBTest {
 
             System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Unable to add item: " + year + " " + title);
             System.err.println(e.getMessage());
         }
@@ -121,8 +118,7 @@ public class AmazonDynamoDBTest {
             Item outcome = table.getItem(spec);
             System.out.println("GetItem succeeded: " + outcome);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.err.println("Unable to read item: " + year + " " + title);
             System.err.println(e.getMessage());
         }
