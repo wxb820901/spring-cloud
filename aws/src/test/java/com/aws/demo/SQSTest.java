@@ -6,12 +6,19 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.*;
 import com.amazonaws.services.sqs.AmazonSQS;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
 
 public class SQSTest {
+    @BeforeClass
+    public static void beforeClass(){
+
+    }
+
+
 
     //SQS GURD msg send/received
     @Test
@@ -22,10 +29,6 @@ public class SQSTest {
          * Creating Service Clients in the AWS SDK for Java Developer Guide.
          */
         final AmazonSQS sqs = AmazonSQSClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
-
-        System.out.println("===============================================");
-        System.out.println("Getting Started with Amazon SQS Standard Queues");
-        System.out.println("===============================================\n");
 
         try {
             // Create a queue.

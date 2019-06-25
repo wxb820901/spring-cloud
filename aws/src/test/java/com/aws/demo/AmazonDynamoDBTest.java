@@ -45,7 +45,7 @@ public class AmazonDynamoDBTest {
     @BeforeClass
     public static void before() throws IOException {
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(Regions.US_WEST_2)
+                .withRegion(Regions.US_EAST_2)
                 .build();
 
         dynamoDB = new DynamoDB(client);
@@ -129,9 +129,9 @@ public class AmazonDynamoDBTest {
         Table table = dynamoDB.getTable(tableName);
         return table.getItem(spec);
     }
-    @AfterClass
-    public static void after() throws IOException {
-        Table table = dynamoDB.getTable(tableName);
-        table.delete();
-    }
+//    @AfterClass
+//    public static void after() throws IOException {
+//        Table table = dynamoDB.getTable(tableName);
+//        table.delete();
+//    }
 }

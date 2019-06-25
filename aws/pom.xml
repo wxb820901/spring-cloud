@@ -23,6 +23,7 @@
         <module>rds</module>
         <module>s3</module>
         <module>dydb</module>
+        <module>iam</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -42,6 +43,28 @@
             <artifactId>spring-cloud-aws-autoconfigure</artifactId>
             <version>${spring-cloud-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.578</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-java-sdk-sqs</artifactId>-->
+<!--            <version>1.11.575</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-java-sdk-dynamodb</artifactId>-->
+<!--            <version>1.11.575</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.amazonaws</groupId>-->
+<!--            <artifactId>aws-java-sdk-sns</artifactId>-->
+<!--            <version>1.11.575</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -49,12 +72,15 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <repositories>
         <repository>
             <id>io.spring.repo.maven.release</id>
             <url>https://repo.spring.io/release/</url>
-            <snapshots><enabled>false</enabled></snapshots>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 </project>

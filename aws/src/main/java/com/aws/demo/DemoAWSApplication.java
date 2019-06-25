@@ -14,23 +14,23 @@ public class DemoAWSApplication {
         SpringApplication.run(DemoAWSApplication.class, args);
 
     }
-    @Value("${ami-id:N/A}")
-    private String amiId;
-
-    @Value("${hostname:N/A}")
-    private String hostname;
-
-    @Value("${instance-type:N/A}")
-    private String instanceType;
-
-    @Value("${services/domain:N/A}")
-    private String serviceDomain;
+//    @Value("${ami-id:N/A}")
+//    private String amiId;
+//
+//    @Value("${hostname:N/A}")
+//    private String hostname;
+//
+//    @Value("${instance-type:N/A}")
+//    private String instanceType;
+//
+//    @Value("${services/domain:N/A}")
+//    private String serviceDomain;
 
     @PostConstruct
     public void init() {
-        System.out.println("init amiId ===> "+amiId);
-        System.out.println("init hostname ===> "+hostname);
-        System.out.println("init instanceType ===> "+instanceType);
-        System.out.println("init serviceDomain ===> "+serviceDomain);
+//        System.out.println("init amiId ===> "+amiId);
+//        System.out.println("init hostname ===> "+hostname);
+//        System.out.println("init instanceType ===> "+instanceType);
+//        System.out.println("init serviceDomain ===> "+serviceDomain);
     }
 }
