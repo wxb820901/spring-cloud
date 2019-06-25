@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 
-public class AmazonDynamoDBTest {
+public class AWSDynamoDBTest {
     AmazonDynamoDB client;
     public static final String tableName = "Movies";
     public static DynamoDB dynamoDB;
