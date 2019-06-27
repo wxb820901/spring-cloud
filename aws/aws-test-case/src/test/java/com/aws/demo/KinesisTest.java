@@ -16,8 +16,6 @@ public class KinesisTest {
      */
     @Test
     public void testPutMsgToKinesisDataFirehose(){
-
-        //--------------------
         AmazonKinesisClientBuilder clientBuilder = AmazonKinesisClientBuilder.standard();
 
         clientBuilder.setRegion(Regions.US_WEST_2.getName());

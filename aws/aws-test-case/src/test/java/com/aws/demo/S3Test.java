@@ -41,40 +41,26 @@ public class S3Test {
     }
     @AfterClass
     public static void afterClass(){
-//        s3.deleteBucket(bucketName);
+        s3.deleteBucket(bucketName);
     }
     @Test
     public void testCreateS3PutObjectDeleteObject() throws IOException {
-        assertTrue(isS3Exist("demo-bucket-20190625-1"));
-//        //create s2
-//        s3.createBucket(bucketName);
-//        assertTrue(isS3Exist(bucketName));
-//
-//        //put object
-//        s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
-//        S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
-//        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
-//        assertTrue(isS3Exist(bucketName));
-//        displayTextInputStream(object.getObjectContent());
-//        assertTrue(isObjExist("My"));
-//
-//        //delete
-//        s3.deleteObject(bucketName, key);
-//        assertFalse(isObjExist(key));
-    }
+//        assertTrue(isS3Exist("demo-bucket-20190625-1"));
+        //create s2
+        s3.createBucket(bucketName);
+        assertTrue(isS3Exist(bucketName));
 
-    //for real case
-    @Test
-    public void testConnectionWithSQS(){
+        //put object
+        s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
+        S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
+        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
+        assertTrue(isS3Exist(bucketName));
+        displayTextInputStream(object.getObjectContent());
+        assertTrue(isObjExist("My"));
 
-    }
-    @Test
-    public void testConnectionWithSNS(){
-
-    }
-    @Test
-    public void testConnectionWithLambda(){
-
+        //delete
+        s3.deleteObject(bucketName, key);
+        assertFalse(isObjExist(key));
     }
 
     private boolean isS3Exist(String bucketName){

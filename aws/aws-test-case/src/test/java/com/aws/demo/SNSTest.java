@@ -64,11 +64,11 @@ public class SNSTest {
             e.printStackTrace();
         }
 
-//        DeleteTopicResult deleteResult = sns.deleteTopic(topicArn);
-//        assertNotNull("verify returned delete result", deleteResult);
-//
-//        ListTopicsResult listTopicsAfterDeletion = sns.listTopics();
-//        assertEquals("topic list should contain zero items after deletion",0,listTopicsAfterDeletion.getTopics().size());
+        DeleteTopicResult deleteResult = sns.deleteTopic(topicArn);
+        assertNotNull("verify returned delete result", deleteResult);
+
+        ListTopicsResult listTopicsAfterDeletion = sns.listTopics();
+        assertEquals("topic list should contain zero items after deletion",0,listTopicsAfterDeletion.getTopics().size());
     }
     @AfterClass
     public static void afterClass(){

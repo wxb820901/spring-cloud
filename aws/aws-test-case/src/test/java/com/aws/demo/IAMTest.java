@@ -37,9 +37,9 @@ public class IAMTest {
                     "    }" +
                     "   ]" +
                     "}";
+
     @Test
     public void test(){
-
         //create user
         final AmazonIdentityManagement iam =
                 AmazonIdentityManagementClientBuilder.standard().withRegion(Regions.US_WEST_2).build();

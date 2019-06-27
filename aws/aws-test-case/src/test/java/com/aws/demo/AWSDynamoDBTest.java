@@ -129,9 +129,9 @@ public class AWSDynamoDBTest {
         Table table = dynamoDB.getTable(tableName);
         return table.getItem(spec);
     }
-//    @AfterClass
-//    public static void after() throws IOException {
+    @AfterClass
+    public static void after() throws IOException {
 //        Table table = dynamoDB.getTable(tableName);
 //        table.delete();
-//    }
+    }
 }
