@@ -29,8 +29,8 @@ vi .aws/credentials"
 and input like below
 
 [default]
-aws_access_key_id = AKIATCLQPINKQC2NUQHQ
-aws_secret_access_key = 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
+aws_access_key_id =
+aws_secret_access_key =
 
 ------------------------------------------------------------------------------------------------------------------------
 2, RDS unreachable
