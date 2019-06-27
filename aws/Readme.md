@@ -1,28 +1,6 @@
 AWS learning account: wxb820901awslearn@126.com
 
-1, IAM
-
-create user：  admin-program
-with Programmatic access checked
-
-
-new iam account
-AKIATCLQPINKQHRHK27D
-7YNRdeI1y2VCr9BENtIyOzFQPtpH1tyobVGuS5kU
-
-*after forced "forgot password", iam account changed
-------------------------------------------------------------------------------------------------------------------------
-2, S3
-
-create bucket: 	aws-demo-20190617
-				aws-demo-20190617-2
-
-------------------------------------------------------------------------------------------------------------------------
-3, EC2
-
-putty login ec2-user@ec2-18-221-132-29.us-east-2.compute.amazonaws.com with key1privatekey.ppk
-------------------------------------------------------------------------------------------------------------------------
-other aws problems:
+aws problems:
 ------------------------------------------------------------------------------------------------------------------------
 how to access EC2?
 ==> click the "connect" button (if putty used, click "connect using PuTTY)") and follow detail step.
