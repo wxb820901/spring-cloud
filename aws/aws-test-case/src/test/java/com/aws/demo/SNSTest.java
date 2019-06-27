@@ -1,5 +1,7 @@
 package com.aws.demo;
 
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.*;
@@ -18,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class SNSTest {
     public static final AmazonSNS sns = AmazonSNSClient.builder()
-                .withRegion("us-west-1")
+                .withRegion(Regions.US_WEST_2)
                 .build();
     public static String topicArn;
     public static final String topicName = "major-topic-" + UUID.randomUUID();

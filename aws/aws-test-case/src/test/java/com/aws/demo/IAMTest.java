@@ -42,7 +42,7 @@ public class IAMTest {
 
         //create user
         final AmazonIdentityManagement iam =
-                AmazonIdentityManagementClientBuilder.standard().withRegion(Regions.US_WEST_1).build();
+                AmazonIdentityManagementClientBuilder.standard().withRegion(Regions.US_WEST_2).build();
         CreateUserRequest request = new CreateUserRequest().withUserName(username);
         CreateUserResult response = iam.createUser(request);
 

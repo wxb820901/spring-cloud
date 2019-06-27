@@ -45,7 +45,7 @@ public class AWSDynamoDBTest {
     @BeforeClass
     public static void before() throws IOException {
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(Regions.US_EAST_2)
+                .withRegion(Regions.US_WEST_2)
                 .build();
 
         dynamoDB = new DynamoDB(client);

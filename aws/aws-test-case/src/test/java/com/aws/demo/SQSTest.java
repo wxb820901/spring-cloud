@@ -28,7 +28,7 @@ public class SQSTest {
          * and region) set automatically. For more information, see
          * Creating Service Clients in the AWS SDK for Java Developer Guide.
          */
-        final AmazonSQS sqs = AmazonSQSClientBuilder.standard().withRegion(Regions.US_EAST_1).build();
+        final AmazonSQS sqs = AmazonSQSClientBuilder.standard().withRegion(Regions.US_WEST_2).build();
 
         try {
             // Create a queue.

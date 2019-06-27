@@ -20,7 +20,7 @@ public class KinesisTest {
         //--------------------
         AmazonKinesisClientBuilder clientBuilder = AmazonKinesisClientBuilder.standard();
 
-        clientBuilder.setRegion(Regions.US_WEST_1.getName());
+        clientBuilder.setRegion(Regions.US_WEST_2.getName());
 //        clientBuilder.setCredentials(credentialsProvider);
 //        clientBuilder.setClientConfiguration(config);
 

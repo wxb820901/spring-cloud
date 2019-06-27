@@ -32,40 +32,54 @@ import static org.junit.Assert.assertTrue;
 
 public class S3Test {
     public static AmazonS3 s3 = new AmazonS3Client();
-    public static final String bucketName = "my-first-s3-bucket-" + UUID.randomUUID();
+    public static final String bucketName = "demo-s3-bucket-" + UUID.randomUUID();
     public static final String key = "MyObjectKey";
     @BeforeClass
     public static void beforeClass(){
-        Region usWest2 = Region.getRegion(Regions.US_WEST_2);
+        Region usWest2 = Region.getRegion(Regions.US_EAST_2);
         s3.setRegion(usWest2);
     }
     @AfterClass
     public static void afterClass(){
-
-        s3.deleteBucket(bucketName);
-
+//        s3.deleteBucket(bucketName);
     }
     @Test
     public void testCreateS3PutObjectDeleteObject() throws IOException {
-        //create s2
-        s3.createBucket(bucketName);
-        assertTrue(isS3Exist(bucketName));
+        assertTrue(isS3Exist("demo-bucket-20190625-1"));
+//        //create s2
+//        s3.createBucket(bucketName);
+//        assertTrue(isS3Exist(bucketName));
+//
+//        //put object
+//        s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
+//        S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
+//        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
+//        assertTrue(isS3Exist(bucketName));
+//        displayTextInputStream(object.getObjectContent());
+//        assertTrue(isObjExist("My"));
+//
+//        //delete
+//        s3.deleteObject(bucketName, key);
+//        assertFalse(isObjExist(key));
+    }
 
-        //put object
-        s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
-        S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
-        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
-        assertTrue(isS3Exist(bucketName));
-        displayTextInputStream(object.getObjectContent());
-        assertTrue(isObjExist("My"));
+    //for real case
+    @Test
+    public void testConnectionWithSQS(){
 
-        //delete
-        s3.deleteObject(bucketName, key);
-        assertFalse(isObjExist(key));
+    }
+    @Test
+    public void testConnectionWithSNS(){
+
+    }
+    @Test
+    public void testConnectionWithLambda(){
+
     }
 
     private boolean isS3Exist(String bucketName){
         for (Bucket bucket : s3.listBuckets()) {
+            System.out.println("==>"+bucket.getName());
             if(bucket.getName().equals(bucketName)){
                 return true;
             }

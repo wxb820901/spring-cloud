@@ -14,7 +14,7 @@ mvn clean install -pl demo-webflux dockerfile:build     -DskipTests
 mvn clean install -pl demo-admin dockerfile:build       -DskipTests
 mvn clean install -pl dubbo-demo/dubbo-demo-provider dockerfile:build  -DskipTests
 mvn clean install -pl dubbo-demo/dubbo-demo-consumer dockerfile:build  -DskipTests
-
+mvn clean install -pl aws/aws-lambda -DskipTests
 ----------------------------------------start up app individual with link--------------------------------------------------
 docker run --name eureka                         -p 8762:8762   springio/demo-eureka
 docker run --name config    --link eureka        -p 59001:59001 springio/demo-config
