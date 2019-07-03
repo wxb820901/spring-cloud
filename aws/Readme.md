@@ -14,8 +14,8 @@ error "Unable to locate credentials" when aws s3 cp a.txt s3://demo-bucket-20190
       Name                    Value             Type    Location
       ----                    -----             ----    --------
    profile                <not set>             None    None
-access_key     ****************UQHQ shared-credentials-file
-secret_key     ****************MqIn shared-credentials-file
+access_key     ****************      shared-credentials-file
+secret_key     ****************      shared-credentials-file
     region                <not set>             None    None
 
 check if the credentials" exist.
