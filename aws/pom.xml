@@ -9,32 +9,20 @@
     <packaging>pom</packaging>
     <name>demo-aws</name>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
     <modules>
         <module>aws-lambda</module>
         <module>aws-test-case</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
-        <docker.image.prefix>demo</docker.image.prefix>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <spring-boot-admin.version>2.1.4</spring-boot-admin.version>
-        <spring-cloud-version>2.1.1.RELEASE</spring-cloud-version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
     <repositories>
         <repository>

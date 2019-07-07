@@ -40,6 +40,53 @@ aws_secret_access_key =
 ------------------------------------------------------------------------------------------------------------------------
 4, use pgadmin connection AWS RDS, default value of "Maintenance database" and "Username" are all postgres
 ------------------------------------------------------------------------------------------------------------------------
+create apigateway+lambda refer to https://gist.github.com/crypticmind/c75db15fd774fe8f53282c3ccbe3d7ad
+
+aws lambda create-function \
+--region us-east-1 \
+--function-name api-test-handler \
+--runtime java8 \
+--handler com.aws.demo.HelloAPIGateway::handleRequest \
+--memory-size 128 \
+--zip-file fileb://~/.m2/repository/com/example/aws-lambda/0.0.1-SNAPSHOT/aws-lambda-0.0.1-SNAPSHOT.jar \
+--role arn:aws:iam::123456:role/role-name \
+--endpoint-url=http://localhost:4574
+
+aws apigateway create-rest-api --region us-east-1 --name 'API-Test' --endpoint-url=http://localhost:4567
+
+#aws apigateway get-rest-apis --endpoint-url=http://localhost:4567  --region us-east-1 #toget next step --rest-api-id
+#aws apigateway get-resources --rest-api-id 863292701A-Z --endpoint-url=http://localhost:4567  --region us-east-1  #toget next step --parent-id
+
+aws apigateway create-resource --rest-api-id 863292701A-Z --parent-id 5A-Z56988398 --path-part somethingId --endpoint-url=http://localhost:4567  --region us-east-1
+#aws apigateway get-resources --rest-api-id 863292701A-Z --endpoint-url=http://localhost:4567  --region us-east-1 #to get nextstep r--esource-id
+aws apigateway put-method \
+--region us-east-1 \
+--rest-api-id 863292701A-Z \
+--resource-id A-Z757066136 \
+--http-method GET \
+--request-parameters "method.request.path.somethingId=true" \
+--authorization-type "NONE" \
+--endpoint-url=http://localhost:4567
+
+aws apigateway put-integration \
+ --region us-east-1 \
+ --rest-api-id 863292701A-Z \
+ --resource-id A-Z757066136 \
+ --http-method GET \
+ --type AWS_PROXY \
+ --integration-http-method POST \
+ --uri arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:000000000000:function:api-test-handler/invocations\
+ --passthrough-behavior WHEN_NO_MATCH \
+ --endpoint-url=http://localhost:4567
+
+ aws apigateway create-deployment \
+  --region us-east-1 \
+  --rest-api-id 863292701A-Z \
+  --stage-name test \
+  --endpoint-url=http://localhost:4567
+
+curl http://localhost:4567/restapis/863292701A-Z/test/_user_request_/HowMuchIsTheFish
+http://localhost:4567/restapis/${API_ID}/${STAGE}/_user_request_/HowMuchIsTheFish
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------

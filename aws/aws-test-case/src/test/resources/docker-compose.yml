@@ -6,13 +6,13 @@ services:
       - "4567-4584:4567-4584"
 #      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
     environment:
-      - "SERVICES=s3,sns,sqs,lambda"
+      - "SERVICES=s3,sns,sqs,lambda,api gateway, apigateway"
       - "DEBUG=1"
 #      - DATA_DIR=${DATA_DIR- }
 #      - PORT_WEB_UI=${PORT_WEB_UI- }
 #      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
 #      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
-#      - DOCKER_HOST=unix:///var/run/docker.sock
+      - "DOCKER_HOST=unix:///var/run/docker.sock"
     volumes:
-      - "C:/Users/bill_wang/tmp/localstack:/tmp/localstack"
+      - "/Users/xiaobingwang/dev/localstack:/tmp/localstack"
 

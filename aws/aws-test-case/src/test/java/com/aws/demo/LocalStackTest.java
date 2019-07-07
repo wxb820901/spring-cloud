@@ -31,12 +31,14 @@ import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.shaded.org.apache.commons.io.FileUtils;
 import org.testcontainers.shaded.org.glassfish.jersey.internal.util.Base64;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 
+import static com.sun.tools.javac.tree.JCTree.Tag.LAMBDA;
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
@@ -46,27 +48,16 @@ public class LocalStackTest {
 
     public static Logger logger = LoggerFactory.getLogger(LocalStackTest.class);
 
-    @ClassRule
-    public static DockerComposeContainer compose = new DockerComposeContainer(
-            new File("src/test/resources/docker-compose.yml"))
-            .withLogConsumer("localstack", new Slf4jLogConsumer(logger))
-            .waitingFor("localstack", Wait.forLogMessage(".*Ready\\.\n", 1))
-            .withLocalCompose(true);;
-//
-//    @ClassRule
-//    public static
-
-
-
     public static LocalStackContainer localstack;
     public static AmazonS3 s3;
     public static AmazonSQS sqs;
     public static AmazonSNS sns;
     public static AWSLambda lambda;
-    @BeforeClass
-    public static void prepareEnv(){
 
-        localstack = new LocalStackContainer().withServices(SQS,S3,SNS,LAMBDA);
+    @BeforeClass
+    public static void prepareEnv() {
+
+        localstack = new LocalStackContainer().withServices();
         s3 = AmazonS3ClientBuilder
                 .standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:4572", Regions.US_EAST_1.getName()))
@@ -108,36 +99,6 @@ public class LocalStackTest {
         Bucket bucket = s3.createBucket(bucketName);
         putOnS3();
     }
-    @Test
-    public void testLambdaConnection() throws IOException {
-        Bucket bucketInput = s3.createBucket("demo-input-bucket-1"+ UUID.randomUUID());
-        Bucket bucketOutput = s3.createBucket("demo-output-bucket-1"+ UUID.randomUUID());
-        CreateQueueRequest createQueueRequest = new CreateQueueRequest("trigger-lambda");
-
-
-        DeployConfig deployConfig = new DeployConfig("location", "description", "function", "handler", 1024, "role", "runtime", 30, "full", false, null, false, new ArrayList<String>(), new ArrayList<String>());
-        File file = new File("path");
-
-        when(zipper.getZip(any(String.class))).thenReturn(file);
-        when(service.deployLambda(any(DeployConfig.class), any(FunctionCode.class), any(UpdateModeValue.class)))
-                .thenReturn(false);
-
-        LambdaUploader uploader = new LambdaUploader(service, zipper, logger);
-        Boolean uploaded = uploader.upload(deployConfig);
-
-        verify(logger, times(1)).log("%nStarting lambda deployment procedure");
-        verify(service, times(1)).deployLambda(eq(deployConfig), any(FunctionCode.class), eq(UpdateModeValue.Full));
-        assertFalse(uploaded);
-
-
-        CreateFunctionRequest createFunctionRequest = new CreateFunctionRequest();
-        createFunctionRequest.setHandler("com.aws.demo::HelloSQS");
-        createFunctionRequest.set
-        lambda.createFunction(createFunctionRequest);
-        CreateEventSourceMappingRequest createEventSourceMappingRequest = new CreateEventSourceMappingRequest();
-        lambda.createEventSourceMapping(createEventSourceMappingRequest);
-
-    }
 
 
     @Test
@@ -162,22 +123,17 @@ public class LocalStackTest {
 
     }
 
-    @Test
-    public void testSQSTriggerLambdaToGetPutS3(){
-        sqs.
-    }
 
     public String putOnS3() throws IOException {
         //put and get
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, Base64.encodeAsString(FileUtils.readFileToByteArray(createSampleFile())));
-        System.out.println(" Base64.encodeAsString: "  + Base64.encodeAsString(FileUtils.readFileToByteArray(createSampleFile())));
+        System.out.println(" Base64.encodeAsString: " + Base64.encodeAsString(FileUtils.readFileToByteArray(createSampleFile())));
         s3.putObject(putObjectRequest);
         S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
         Assert.assertNotNull(object);
 //        displayTextInputStream(object.getObjectContent().getDelegateStream());
         return key;
     }
-
 
 
 //    private boolean isObjExist(String prefix){
@@ -202,7 +158,6 @@ public class LocalStackTest {
         return file;
 
     }
-
 
 
     private void displayTextInputStream(InputStream input) throws IOException {
