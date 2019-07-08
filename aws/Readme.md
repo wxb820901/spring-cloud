@@ -40,6 +40,12 @@ aws_secret_access_key =
 ------------------------------------------------------------------------------------------------------------------------
 4, use pgadmin connection AWS RDS, default value of "Maintenance database" and "Username" are all postgres
 ------------------------------------------------------------------------------------------------------------------------
+create apigateway+lambda refer to https://gist.github.com/crypticmind/c75db15fd774fe8f53282c3ccbe3d7ad
+all in setup.sh
+
+start docker as:
+TMPDIR=/private$TMPDIR docker-compose -f /Users/xiaobingwang/dev/git-local/spring-cloud/aws/aws-test-case/src/test/resources/dc-macos.yml up
+
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------

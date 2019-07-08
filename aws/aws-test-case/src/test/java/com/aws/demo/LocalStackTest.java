@@ -39,7 +39,6 @@ import java.util.UUID;
 
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.any;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.*;
 
@@ -47,16 +46,19 @@ public class LocalStackTest {
 
     public static Logger logger = LoggerFactory.getLogger(LocalStackTest.class);
 
+    @ClassRule
+    public static DockerComposeContainer compose = new DockerComposeContainer(
+            new File("src/test/resources/docker-compose.yml"))
+            .withLogConsumer("localstack", new Slf4jLogConsumer(logger))
+            .waitingFor("localstack", Wait.forLogMessage(".*Ready\\.\n", 1))
+            .withLocalCompose(true);;
 //
-//    public static DockerComposeContainer compose = new DockerComposeContainer(
-//            new File("src/test/resources/docker-compose.yml"))
-//            .withLogConsumer("localstack", new Slf4jLogConsumer(logger))
-//            .waitingFor("localstack", Wait.forLogMessage(".*Ready\\.\n", 1))
-//            .withLocalCompose(true);;
-//
+//    @ClassRule
+//    public static
 
 
-    public static LocalStackContainer localstack = new LocalStackContainer();
+
+    public static LocalStackContainer localstack;
     public static AmazonS3 s3;
     public static AmazonSQS sqs;
     public static AmazonSNS sns;
@@ -64,6 +66,7 @@ public class LocalStackTest {
     @BeforeClass
     public static void prepareEnv(){
 
+        localstack = new LocalStackContainer().withServices(SQS,S3,SNS,LAMBDA);
         s3 = AmazonS3ClientBuilder
                 .standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:4572", Regions.US_EAST_1.getName()))
@@ -129,6 +132,8 @@ public class LocalStackTest {
 
     }
 
+
+
     public String putOnS3() throws IOException {
         //put and get
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, Base64.encodeAsString(FileUtils.readFileToByteArray(createSampleFile())));
@@ -139,88 +144,15 @@ public class LocalStackTest {
 //        displayTextInputStream(object.getObjectContent().getDelegateStream());
         return key;
     }
-    /*
-aws s3api create-bucket --bucket 'demo-input-bucket-1' --endpoint-url 'http://localhost:4572'
-aws s3api create-bucket --bucket 'demo-output-bucket-1' --endpoint-url 'http://localhost:4572'
-aws s3api put-object --bucket 'demo-input-bucket-1' --key 'b.txt' --body 'C:/Users/bill_wang/b.txt' --endpoint-url 'http://localhost:4572'
-aws sns create-topic --name 'demo-sns-created-by-cli-1130' --endpoint-url 'http://localhost:4575'
-aws lambda create-function --region us-east-1 --function-name api-test-handler --runtime java8 --handler com.aws.demo.HelloS3::handleRequest --memory-size 128 --zip-file fileb://C:/Users/bill_wang/.m2/repository/com/example/aws-lambda/0.0.1-SNAPSHOT/aws-lambda-0.0.1-SNAPSHOT.jar --role arn:aws:iam::123456:role/role-name --endpoint-url=http://localhost:4574
-aws lambda create-event-source-mapping  --event-source-arn 'arn:aws:sns:us-east-1:123456789012:demo-sns-created-by-cli-1130' --function-name 'api-test-handler'       --endpoint-url 'http://localhost:4574'
-aws sns publish --message 'hello123' --topic-arn 'arn:aws:sns:us-east-1:123456789012:demo-sns-created-by-cli-1130' --endpoint-url 'http://localhost:4575'
 
 
 
-    * */
-    public static final String COMMAND_AWS = "C:/Program Files/Amazon/AWSCLI/bin/aws.exe";
-    public static final String COMMAND_S3 = "s3api";
-    public static final String COMMAND_SNS = "sns";
-    public static final String COMMAND_LAMBDA = "lambda";
-    public static final String COMMAND_CREATE_BUCKET = "create-bucket";
-    public static final String COMMAND_BUCKET_NAME = "--bucket";
-    public static final String COMMAND_PUT_OBJECT = "put-object";
-    public static final String COMMAND_CREATE_TOPIC = "create-topic";
-    public static final String COMMAND_CREATE_FUNCTION = "create-function";
-    public static final String COMMAND_CREATE_EVENT_SOURCE_MAPPING = "create-event-source-mapping";
-    public static final String COMMAND_PUBLISH = "publish ";
-    public static final String COMMAND_KEY = "--key";
-    public static final String COMMAND_ENDPOINT_URL = "--endpoint-url";
-    public static final String COMMAND_NAME = "--name";
-    public static final String COMMAND_BODY = "--body";
-    public static final String COMMAND_REGION = "--region";
-    public static final String COMMAND_FUNCTION_NAME = "--function-name";
-    public static final String COMMAND_RUN_TIME = "--runtime";
-    public static final String COMMAND_HANDLER ="--handler ";
-    public static final String COMMAND_MEMORY_SIZE="--memory-size ";
-    public static final String COMMAND_ZIP_FILE = "--zip-file";
-    public static final String COMMAND_ROLE_ARN = "--role arn";
-    public static final String COMMAND_EVENT_SRC_ARN = " --event-source-arn";
-    public static final String COMMAND_MESSAGE = "--message";
-    public static final String COMMAND_TOPIC_ARN = "--topic-arn";
-
-    public static final String BUCKET_INPUT_NAME = "demo-input-bucket-1";
-    public static final String BUCKET_OUTPUT_NAME = "demo-output-bucket-1";
-    public static final String BUCKET_OBJECT_KEY = "b.txt";
-    public static final String BUCKET_OBJECT_PATH = "C:/Users/bill_wang/b.txt";
-    public static final String ENDPOINT_URL_S3 = "http://localhost:4572";
-    public static final String ENDPOINT_URL_SNS = "http://localhost:4575";
-    public static final String ENDPOINT_URL_LAMBDA = "http://localhost:4574";
-    public static final String TOPIC_NAME = "demo-sns-created-by-cli-1130";
-    public static final String REGION = "us-east-1";
-    public static final String FUNCTION_NAME = "api-test-handler";
-    public static final String RUN_TIME = "java8";
-    public static final String HANDLER = "com.aws.demo.HelloS3::handleRequest";
-    public static final String MEMORY_SIZE ="128";
-    public static final String ZIP_FILE_PATH = "fileb://C:/Users/bill_wang/.m2/repository/com/example/aws-lambda/0.0.1-SNAPSHOT/aws-lambda-0.0.1-SNAPSHOT.jar";
-    public static final String ROLE_ARN = "arn:aws:iam::123456:role/role-name";
-    public static final String EVENT_SRC_ARN = "arn:aws:sns:us-east-1:123456789012:demo-sns-created-by-cli-1130";
-    public static final String MESSAGE = "hello123";
-    public static final String TOPIC_ARN = "arn:aws:sns:us-east-1:123456789012:demo-sns-created-by-cli-1130";
-    @Test
-    public void testLambdaConnection() throws IOException {
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_S3,    COMMAND_S3,    COMMAND_CREATE_BUCKET,              COMMAND_BUCKET_NAME, BUCKET_INPUT_NAME);
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_S3,    COMMAND_S3,    COMMAND_CREATE_BUCKET,              COMMAND_BUCKET_NAME, BUCKET_OUTPUT_NAME);
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_S3,    COMMAND_S3,    COMMAND_PUT_OBJECT,                 COMMAND_BUCKET_NAME, BUCKET_INPUT_NAME,COMMAND_KEY,BUCKET_OBJECT_KEY,COMMAND_BODY, BUCKET_OBJECT_PATH );
-        assertTrue(isObjExist(BUCKET_INPUT_NAME, "b.txt"));
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_SNS,   COMMAND_SNS,   COMMAND_CREATE_TOPIC,               COMMAND_NAME, TOPIC_NAME);
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_LAMBDA,COMMAND_LAMBDA,COMMAND_CREATE_FUNCTION,            COMMAND_REGION,REGION, COMMAND_FUNCTION_NAME, FUNCTION_NAME ,COMMAND_RUN_TIME,RUN_TIME ,COMMAND_HANDLER, HANDLER ,COMMAND_MEMORY_SIZE,MEMORY_SIZE,COMMAND_ZIP_FILE, ZIP_FILE_PATH, COMMAND_ROLE_ARN, ROLE_ARN );
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_LAMBDA,COMMAND_LAMBDA,COMMAND_CREATE_EVENT_SOURCE_MAPPING,COMMAND_EVENT_SRC_ARN,EVENT_SRC_ARN, COMMAND_FUNCTION_NAME,FUNCTION_NAME       );
-        waitForProcess(COMMAND_AWS,COMMAND_ENDPOINT_URL,ENDPOINT_URL_SNS,   COMMAND_SNS,   COMMAND_PUBLISH,                    COMMAND_MESSAGE,MESSAGE ,COMMAND_TOPIC_ARN,TOPIC_ARN );
-
-
-
-    }
-
-
-
-
-
-
-    private boolean isObjExist(String bucketName, String prefix){
-        ObjectListing objectListing = s3.listObjects(new ListObjectsRequest()
-                .withBucketName(bucketName)
-                .withPrefix(prefix));
-        return objectListing.getObjectSummaries().size() != 0;
-    }
+//    private boolean isObjExist(String prefix){
+//        ObjectListing objectListing = s3.listObjects(new ListObjectsRequest()
+//                .withBucketName(bucketName)
+//                .withPrefix(prefix));
+//        return objectListing.getObjectSummaries().size() != 0;
+//    }
 
 
     private File createSampleFile() throws IOException {
@@ -253,24 +185,10 @@ aws sns publish --message 'hello123' --topic-arn 'arn:aws:sns:us-east-1:12345678
         System.out.println();
     }
 
-
-
-    public static void waitForProcess(String ... commands) throws IOException {
-        ProcessBuilder pb = new ProcessBuilder(commands);
-        pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
-        Process p = pb.start();
-        while(p.isAlive()) {
-            try {
-                new Thread().join(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        for(String letter : commands){
-            System.out.print(letter+" ");
-        }
-        System.out.println("over");
-
-    }
+//    private boolean isObjExist(String prefix){
+//        ObjectListing objectListing = s3.listObjects(new ListObjectsRequest()
+//                .withBucketName(bucketName)
+//                .withPrefix(prefix));
+//        return objectListing.getObjectSummaries().size() != 0;
+//    }
 }
