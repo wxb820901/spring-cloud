@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(LocalstackTestRunner.class)
 public class APIGatewayLambdaTest {
+
     @Test
     public void testAPIGatewayLambda() {
-
 
     }
 }

@@ -48,8 +48,8 @@ public class HelloAPIGateway implements RequestStreamHandler {
             }
 
 
-            responseBody.put("message", "No item found");
-            responseJson.put("statusCode", 404);
+            responseBody.put("message", "hello world");
+            responseJson.put("statusCode", 200);
 
 
             JSONObject headerJson = new JSONObject();
