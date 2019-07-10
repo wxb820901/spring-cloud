@@ -22,7 +22,7 @@ public class HelloAPIGateway implements RequestStreamHandler {
     public void handleGetByParam(
             InputStream inputStream, OutputStream outputStream, Context context)
             throws IOException {
-        LambdaLogger lambdaLogger = context..getLogger();
+        LambdaLogger lambdaLogger = context.getLogger();
         JSONParser parser = new JSONParser();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
