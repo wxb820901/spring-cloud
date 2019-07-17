@@ -1,6 +1,7 @@
-$JAVA_HANDLER="com.aws.demo.HelloAPIGateway::handleRequest"
-$LOCAL_JAR_PATH="~/.m2/repository/com/example/aws-lambda/0.0.1-SNAPSHOT/aws-lambda-0.0.1-SNAPSHOT.jar"
-$API_NAME="api"
+$JAVA_HANDLER="com.aws.demo.HelloContext::handleRequest"
+#$LOCAL_JAR_PATH="~/.m2/repository/com/example/aws-lambda/0.0.1-SNAPSHOT/aws-lambda-0.0.1-SNAPSHOT.jar"
+
+$API_NAME="api-hello-context"
 $REGION="us-east-1"
 $STAGE="test"
 

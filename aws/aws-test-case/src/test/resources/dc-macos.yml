@@ -6,13 +6,12 @@ services:
       - "4567-4584:4567-4584"
       - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
     environment:
-      - "SERVICES={SERVICES-iam, lambda, apigateway, s3, sns, cloudwatch, logs}"
+      - "SERVICES={SERVICES-iam, lambda, apigateway, cloudwatch, logs}"
       - "DEBUG=1"
-      #      - DATA_DIR=${DATA_DIR- }
-      #- "PORT_WEB_UI=${PORT_WEB_UI- }"
       - "LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-local }"
-      #      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
       - "DOCKER_HOST=unix:///var/run/docker.sock"
+      - "LAMBDA_REMOTE_DOCKER=true"
+      - "LAMBDA_DOCKER_NETWORK=spring-cloud-network"
+      - "LOCALSTACK_HOSTNAME=api-host"
     volumes:
       - "${TMPDIR:-/Users/xiaobingwang/dev/localstack}:/tmp/localstack"
-

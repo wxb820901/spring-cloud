@@ -10,7 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <artifactId>aws-lambda</artifactId>
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.amazonaws</groupId>
@@ -36,7 +40,12 @@
 
 
 
-
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
