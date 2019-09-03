@@ -88,7 +88,7 @@ public class IAMTest {
         ListAttachedRolePoliciesRequest listAttachedRolePoliciesRequest =
                 new ListAttachedRolePoliciesRequest()
                         .withRoleName(rolename);
-        List<AttachedPolicy> matching_policies = new ArrayList<>();
+        List<AttachedPolicy> matching_policies = new ArrayList();
         boolean allDone = false;
         while(!allDone) {
             ListAttachedRolePoliciesResult listAttachedRolePoliciesResult =

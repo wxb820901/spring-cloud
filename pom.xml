@@ -9,7 +9,6 @@
 	<description>this pom for build docker images</description>
 	<packaging>pom</packaging>
 	<modules>
-	    <module>demo-api</module>
 		<module>demo-eureka</module>
 		<module>demo-config</module>
 		<module>demo-zuul</module>

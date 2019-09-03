@@ -26,7 +26,7 @@ public class KinesisTest {
 
         PutRecordsRequest putRecordsRequest  = new PutRecordsRequest();
         putRecordsRequest.setStreamName("demo-delivery-stream-1");
-        List<PutRecordsRequestEntry> putRecordsRequestEntryList  = new ArrayList<>();
+        List<PutRecordsRequestEntry> putRecordsRequestEntryList  = new ArrayList();
         for (int i = 0; i < 10; i++) {
             PutRecordsRequestEntry putRecordsRequestEntry  = new PutRecordsRequestEntry();
             putRecordsRequestEntry.setData(ByteBuffer.wrap(String.valueOf(i).getBytes()));

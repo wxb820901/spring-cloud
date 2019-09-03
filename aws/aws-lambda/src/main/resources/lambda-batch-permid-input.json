@@ -1,0 +1,5 @@
+{
+  "type":"TYPE1",
+  "action":"GET_BATCH_PERM_ID",
+  "size":"100"
+}

@@ -1,0 +1,14 @@
+{
+  "appId": {
+    "S": "TYPE2"
+  },
+  "currentPermId": {
+    "N": "1000001"
+  },
+  "minPermId": {
+    "N": "1000001"
+  },
+  "maxPermId": {
+    "N": "2000000"
+  }
+}
