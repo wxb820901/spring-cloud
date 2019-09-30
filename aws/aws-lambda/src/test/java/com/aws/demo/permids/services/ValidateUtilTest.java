@@ -39,4 +39,13 @@ public class ValidateUtilTest {
         Assert.assertTrue(ValidateUtil.validateInputJson(json, withErrorService));
 
     }
+    @Test
+    public void testMaxInt() throws IOException {
+        System.out.println(Integer.MAX_VALUE);
+        try {
+            System.out.println(Integer.parseInt("2147483648"));
+        }catch(NumberFormatException e){
+            Assert.assertEquals("For input string: \"2147483648\"", e.getMessage());
+        }
+    }
 }
