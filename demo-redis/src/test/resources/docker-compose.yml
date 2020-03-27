@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  eureka:
+    image: "demo/demo-eureka"
+    ports:
+      - "8762:8762"
+    environment:
+      - "spring_profiles_active=docker"
+
+
+  config:
+    image: "demo/demo-config"
+    ports:
+      - "59001:59001"
+    environment:
+      - "spring_profiles_active=docker"
+    depends_on:
+      - eureka
+
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    entrypoint: redis-server --appendonly yes
+    restart: always
+
+
+  demo-redis:
+    image: "demo/demo-redis"
+    ports:
+      - "59401:59401"
+    environment:
+      - "spring_profiles_active=docker"
+    restart: always
+    depends_on:
+      - redis
+      - config
+
+
+networks:
+  default:
+    external:
+      name: spring-cloud-network
